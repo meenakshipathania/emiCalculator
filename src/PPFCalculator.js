@@ -8,35 +8,35 @@ Chart.register(
 
 
 function PPFCal() {
-  const [value1, onChange1] = useState(1);
-  const [value2, onChange2] = useState(1);
-  const [value3, onChange3] = useState(1);
+  const [value1, onChange1] = useState(10000);
+  const [value2, onChange2] = useState(7.1);
+  const [value3, onChange3] = useState(5);
   
 
   const investment = value1 * value3;
   let rate = value2 / 100;
-  let futureValue = +value1 * [(Math.pow(1 + rate, value3) - 1) / rate];
+  let futureValue = value1 * ((Math.pow(1 + rate, value3) - 1) /rate) * (1+rate);
   futureValue=Math.round(futureValue);
   let returns = futureValue - investment;
 
-  const data = {
-    labels: [
-      'Amount',
-      'Interest',
-      'Total Years'
-  ],
-    datasets: [{
-        data: [value1, value2, value3],
-        backgroundColor: ['#17BFB5','#37578a','#b4294e'],
-    }
-  ],  
-  };
+  // const data = {
+  //   labels: [
+  //     'Amount',
+  //     'Interest',
+  //     'Total Years'
+  // ],
+  //   datasets: [{
+  //       data: [value1, value2, value3],
+  //       backgroundColor: ['#17BFB5','#37578a','#b4294e'],
+  //   }
+  // ],  
+  // };
   
   const datashow = {
     labels: [
       'Investment',
       'Return',
-      'Future Value'
+      'Total Value'
   ],
     datasets: [{
         data: [ investment, returns, futureValue ],
@@ -54,26 +54,28 @@ function PPFCal() {
  
   return (
     <>
-      <div className="container col-12">
+      <div className="container">
         <div className="row">
-          <div className="menu col-xs-12 col-md-3">
-            <ul>
-              <li><a href="/">EMI Calculator</a></li>
-              <li><a href="mutual">Mutual Fund Calculator</a></li>
-              <li><a href="PPFCalculator">PPF Calculator</a></li>
-              <li><a href="FDCalculator">FD Calculator</a></li>
-              <li><a href="RDCalculator">RD Calculator</a></li>
-              <li><a href="Lumpsum">Lump Sum Calculator</a></li>
-              <li><a href="SIPCalculator">SIP Calculator</a></li>
-            </ul>
+          <div className="menu marg">
+            <a href="/SIPCalculator">SIP Calculator</a>
+            <a href="/Lumpsum">Lump Sum Calculator</a>
+            <a href="/mutual">Mutual Fund Calculator</a>
+            <a href="/PPFCalculator">PPF Calculator</a>
+            <a href="/SWPCalculator">SWP Calculator</a>
+            <a href="/FDCalculator">FD Calculator</a>
+            <a href="/RDCalculator">RD Calculator</a>
+            <a href="/FDCalculator">HRA Calculator</a> 
+            <a href="/EMICalculator">EMI Calculator</a>
+            <a href="/RDCalculator">NPS Calculator</a>
           </div>
-          <div className="calculation col-xs-12 col-md-9">
-            <div className="row head">
+          <div className="calculation">
+            <div className="calculator">
             <h1 className="heading">PPF Calculator</h1>
-            <div className="calculate col-md-6">
+            <div className="inner_container">
+              <div className="half">
               <form action="/" method="post">
                 <div className="inputfield">
-                  <label htmlFor="invest1">Total Investment</label>
+                  <label htmlFor="invest1">Yearly Investment</label>
                   <input className="right" type="text" value={value1 ? value1 : 1} id="monthly_investment" onChange={({ target: { value: radius } }) => {
                 onChange1(radius); test();
               }}></input>
@@ -84,7 +86,7 @@ function PPFCal() {
               <br />
               <br />
               <div className="inputfield">
-                  <label htmlFor="invest2">Return Rate (in %)</label>
+                  <label htmlFor="invest2"> Expected Return Rate (in %)</label>
                   <input className="right" type="text" value={value2 ? value2 : 0} id="return_rate" onChange={({ target: { value: radius } }) => {
                 onChange2(radius); test();
               }} ></input>
@@ -95,7 +97,7 @@ function PPFCal() {
                <br />
                <br />
                <div className="inputfield">
-                  <label htmlFor="invest3">Time Period (in Monthes)</label>
+                  <label htmlFor="invest3">Time Period (in years)</label>
                   <input className="right" type="text" value={value3 ? value3 : 0} id="time_period" onChange={({ target: { value: radius } }) => {
                 onChange3(radius); test();
               }}></input>
@@ -105,23 +107,28 @@ function PPFCal() {
               }}></input>
               <br />
                <br />
-               <span id="totalInvestment"> Total Investment:₹ {investment}</span>
+               <span id="totalInvestment"> Invested Amount:<strong>₹ {investment}</strong></span>
                <br />
                <br />
-               <span> Total Return:₹ {returns}</span>
+               <span> Estimated Return:<strong>₹ {returns}</strong></span>
                <br />
                <br />
-               <span> Future value:₹ {futureValue}</span>
+               <span> Total value:<strong>₹ {futureValue}</strong></span>
                <br />
                <br />
               </form>
-            </div>
-            <div className="chart mutu col-md-6 col-sm-6 show" id="dou1">
+              </div>
+              <div className="half">
+              {/* <div className="chart mutu show" id="dou1">
               <Doughnut data={data}></Doughnut>
-            </div>
-            <div className="chart mutu col-md-6 hide" id="dou2">
+            </div> */}
+            <div className="chart mutu" id="dou2">
               <Doughnut data={datashow}></Doughnut>
             </div>
+              </div>
+              
+            </div>
+            
             </div>
           </div>
         </div>

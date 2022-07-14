@@ -7,8 +7,10 @@ import React from 'react';
 import ReactDOM from "react-dom";
 import './index.css';
 import App from './App';
+import EMICalculator from './EMICalculator';
 import MutualFund from './MutualFund';
 import PPFCal from './PPFCalculator';
+import SWPCal from './SWPCalculator';
 import FDCal from './FDCalculator';
 import RDCal from './RDCalculator';
 import Lumpsum from './LumpsumCalculator';
@@ -20,8 +22,10 @@ ReactDOM.render(
     {/* <Navigation /> */}
     <Routes>
       <Route path="/" element={<App />} />
+      <Route path="/EMICalculator" element={<EMICalculator />} />
       <Route path="/mutual" element={<MutualFund />} />
       <Route path="/PPFcalculator" element={<PPFCal />} />
+      <Route path="/SWPcalculator" element={<SWPCal />} />
       <Route path="/FDCalculator" element={<FDCal />} />
       <Route path="/RDCalculator" element={<RDCal />} />
       <Route path="/Lumpsum" element={<Lumpsum />} />

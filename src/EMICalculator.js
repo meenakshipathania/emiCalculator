@@ -1,21 +1,23 @@
 import React, { useState } from "react";
 import "./App.css";
+// import MutualFund from "./MutualFund";
 import { Chart, Tooltip, Title, ArcElement, Legend} from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
 Chart.register(
   Tooltip, Title, ArcElement, Legend
 );
 
-
-function MutualFund() {
-  const [value1, onChange1] = useState(10000);
+function EMICalculator() {
+  const [value1, onChange1] = useState(1000000);
   const [value2, onChange2] = useState(12);
   const [value3, onChange3] = useState(5);
-
-
-  const futurevalue= value1 * Math.pow(1 + value2 / 100, value3);
-  const future_value = Math.round(futurevalue);
-  const estimated_return = future_value- value1;
+  
+  let r = value2/100;
+  r =r/12;
+  const emi = (value1 * r * Math.pow(1+r,value3*12))/(Math.pow(1+r,value3*12)-1);
+  const total= Math.round(emi);
+  let interest = emi*value3*12-value1;
+  interest=Math.round(interest);
 
   // const data = {
   //   labels: [
@@ -27,19 +29,18 @@ function MutualFund() {
   //       data: [value1, value2, value3],
   //       backgroundColor: ['#17BFB5','#37578a','#b4294e'],
   //   }
-  // ],
-    
-  // };
+  // ],  
+// };
   
   const datashow = {
     labels: [
       'Investment',
-      'Return',
-      'Total Value'
+      'Monthly EMI',
+      'Total Interest'
   ],
     datasets: [{
-        data: [value1, estimated_return, future_value ],
-        backgroundColor: ['#17BFB5','#37578a','#b4294e'],
+        data: [value1, total, interest],
+        backgroundColor: ['#b4294e','#37578a', '#17BFB5'],
     }
   ],
     
@@ -50,33 +51,31 @@ function MutualFund() {
   document.querySelector('#dou2').classList.add("show");
   document.querySelector('#dou1').classList.remove("show");
   }
-  
- 
   return (
     <>
       <div className="container">
         <div className="row">
-          <div className="menu marg">
-            <a href="/SIPCalculator">SIP Calculator</a>
-            <a href="/Lumpsum">Lump Sum Calculator</a>
-            <a href="/mutual">Mutual Fund Calculator</a>
-            <a href="/PPFCalculator">PPF Calculator</a>
-            <a href="/SWPCalculator">SWP Calculator</a>
-            <a href="/FDCalculator">FD Calculator</a>
-            <a href="/RDCalculator">RD Calculator</a>
-            <a href="/FDCalculator">HRA Calculator</a> 
-            <a href="/EMICalculator">EMI Calculator</a>
-            <a href="/RDCalculator">NPS Calculator</a>
+        <div className="menu marg">
+            <a href="/SIPCalculator" onclick="setCity(event)">SIP Calculator</a>
+            <a href="/Lumpsum" onclick="setCity(event)">Lump Sum Calculator</a>
+            <a href="/mutual" onclick="setCity(event)">Mutual Fund Calculator</a>
+            <a href="/PPFCalculator" onclick="setCity(event)">PPF Calculator</a>
+            <a href="/SWPCalculator" onclick="setCity(event)">SWP Calculator</a>
+            <a href="/FDCalculator" onclick="setCity(event)">FD Calculator</a>
+            <a href="/RDCalculator" onclick="setCity(event)">RD Calculator</a>
+            <a href="/FDCalculator" onclick="setCity(event)">HRA Calculator</a> 
+            <a href="/EMICalculator" onclick="setCity(event)">EMI Calculator</a>
+            <a href="/RDCalculator" onclick="setCity(event)">NPS Calculator</a>
           </div>
           <div className="calculation">
             <div className="calculator">
-            <h1 className="heading">Mutual Fund Calculator</h1>
+            <h2 className="heading">EMI Calculator</h2>
             <div className="inner_container">
               <div className="half">
               <form action="/" method="post">
                 <div className="inputfield">
-                  <label htmlFor="invest1">Total Investment</label>
-                  <input className="right" type="text" value={value1 ? value1 : 1} id="monthly_investment" onChange={({ target: { value: radius } }) => {
+                  <label htmlFor="invest1">Loan Amount</label>
+                  <input className="right" type="text" value={value1 ? value1 : 1} placeholder="1000" id="monthly_investment" onChange={({ target: { value: radius } }) => {
                 onChange1(radius); test();
               }}></input>
                 </div>
@@ -86,10 +85,10 @@ function MutualFund() {
               <br />
               <br />
               <div className="inputfield">
-                  <label htmlFor="invest2">Expected Return Rate (in %)</label>
-                  <input className="right" type="text" value={value2 ? value2 : 0} id="invest2" onChange={({ target: { value: radius } }) => {
+                  <label htmlFor="invest2">Rate of Interest (in %)</label>
+                  <input className="right" type="text" value={value2 ? value2 : 0} id="return_rate" onChange={({ target: { value: radius } }) => {
                 onChange2(radius); test();
-              }}></input>
+              }} ></input>
                 </div>
                 <input type="range" min="1" id="invest2" value={value2 ? value2 : 0} max="30" className="range" onChange={({ target: { value: radius } }) => {
                 onChange2(radius); test();
@@ -97,7 +96,7 @@ function MutualFund() {
                <br />
                <br />
                <div className="inputfield">
-                  <label htmlFor="invest3">Time Period (in years)</label>
+                  <label htmlFor="invest3">Time Period (in Months)</label>
                   <input className="right" type="text" value={value3 ? value3 : 0} id="time_period" onChange={({ target: { value: radius } }) => {
                 onChange3(radius); test();
               }}></input>
@@ -107,22 +106,22 @@ function MutualFund() {
               }}></input>
                <br />
                <br />
-               <span> Invested Amount:<strong>₹ {value1}</strong></span>
+               <span id="totalInvestment"> Amount:<strong>₹ {value1}</strong></span>
                <br />
                <br />
-               <span> Estimated Returns:<strong>₹ {estimated_return}</strong></span>
+               <span id="future"> EMI:<strong>₹ {total}</strong></span>
                <br />
                <br />
-               <span> Total value:<strong>₹ {future_value}</strong></span>
+               <span id="interest"> Total Interest:<strong>₹ {interest}</strong></span>
                <br />
                <br />
               </form>
               </div>
               <div className="half">
-              {/* <div className="chart mutu show" id="dou1">
+              {/* <div className="chart pi show" id="dou1">
               <Doughnut data={data}></Doughnut>
             </div> */}
-            <div className="chart mutu" id="dou2">
+            <div className="chart pi" id="dou2">
               <Doughnut data={datashow}></Doughnut>
             </div>
               </div>
@@ -137,4 +136,4 @@ function MutualFund() {
   );
 }
 
-export default MutualFund;
+export default EMICalculator;
