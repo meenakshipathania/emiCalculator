@@ -46,26 +46,74 @@ function EMICalculator() {
     
   };
 
-  function test() {
-  document.querySelector('#dou1').classList.add("hide");
-  document.querySelector('#dou2').classList.add("show");
-  document.querySelector('#dou1').classList.remove("show");
+  // function test() {
+  // document.querySelector('#dou1').classList.add("hide");
+  // document.querySelector('#dou2').classList.add("show");
+  // document.querySelector('#dou1').classList.remove("show");
+  // }
+
+  function functionOne(e) {
+    let value = +e.target.value;
+    if (value === 2) {
+      window.location.href = "/SIPCalculator";
+    } else if (value === 3) {
+      window.location.href = "/Lumpsum";
+    } else if (value === 4) {
+      window.location.href = "/mutual";
+    } else if (value === 5) {
+      window.location.href = "/PPFCalculator";
+    } else if (value === 6) {
+      window.location.href = "/SWPCalculator";
+    } else if (value === 7) {
+      window.location.href = "/FDCalculator";
+    } else if (value === 8) {
+      window.location.href = "/RDCalculator";
+    } else if (value === 9) {
+      window.location.href = "/HRACalculator";
+    } else if (value === 10) {
+      window.location.href = "/EMICalculator";
+    } else if (value === 11) {
+      window.location.href = "/NPSCalculator";
+    } else {
+      window.location.href = "/SIPCalculator";
+    }
   }
+
   return (
     <>
       <div className="container">
         <div className="row">
         <div className="menu marg">
-            <a href="/SIPCalculator" onclick="setCity(event)">SIP Calculator</a>
-            <a href="/Lumpsum" onclick="setCity(event)">Lump Sum Calculator</a>
-            <a href="/mutual" onclick="setCity(event)">Mutual Fund Calculator</a>
-            <a href="/PPFCalculator" onclick="setCity(event)">PPF Calculator</a>
-            <a href="/SWPCalculator" onclick="setCity(event)">SWP Calculator</a>
-            <a href="/FDCalculator" onclick="setCity(event)">FD Calculator</a>
-            <a href="/RDCalculator" onclick="setCity(event)">RD Calculator</a>
-            <a href="/FDCalculator" onclick="setCity(event)">HRA Calculator</a> 
-            <a href="/EMICalculator" onclick="setCity(event)">EMI Calculator</a>
-            <a href="/RDCalculator" onclick="setCity(event)">NPS Calculator</a>
+            <a href="/SIPCalculator">SIP Calculator</a>
+            <a href="/Lumpsum">Lump Sum Calculator</a>
+            <a href="/mutual">Mutual Fund Calculator</a>
+            <a href="/PPFCalculator">PPF Calculator</a>
+            <a href="/SWPCalculator">SWP Calculator</a>
+            <a href="/FDCalculator">FD Calculator</a>
+            <a href="/RDCalculator">RD Calculator</a>
+            <a href="/FDCalculator">HRA Calculator</a> 
+            <a href="/EMICalculator">EMI Calculator</a>
+            <a href="/RDCalculator">NPS Calculator</a>
+          </div>
+          <div className="drop">
+            <select
+              className="droplist"
+              onChange={(e) => {
+                functionOne(e);
+              }}
+            >
+              <option value="1">Calculator</option>
+              <option value="2">SIP Calculator</option>
+              <option value="3">Lump Sum Calculator</option>
+              <option value="4">Mutual Fund Calculator</option>
+              <option value="5">PPF Calculator</option>
+              <option value="6">SWP Calculator</option>
+              <option value="7">FD Calculator</option>
+              <option value="8">RD Calculator</option>
+              <option value="9">HRA Calculator</option>
+              <option value="10">EMI Calculator</option>
+              <option value="11">NPS Calculator</option>
+            </select>
           </div>
           <div className="calculation">
             <div className="calculator">
@@ -76,18 +124,18 @@ function EMICalculator() {
                 <div className="inputfield">
                   <label htmlFor="invest1">Loan Amount</label>
                   <input className="right" type="text" value={value1 ? value1 : 1} placeholder="1000" id="monthly_investment" onChange={({ target: { value: radius } }) => {
-                onChange1(radius); test();
+                onChange1(radius);
               }}></input>
                 </div>
                 <input type="range" min="1" id="invest1" value={value1 ? value1 : 1} max="200000" className="range" onChange={({ target: { value: radius } }) => {
-                onChange1(radius); test();
+                onChange1(radius);
               }}></input>
               <br />
               <br />
               <div className="inputfield">
                   <label htmlFor="invest2">Rate of Interest (in %)</label>
                   <input className="right" type="text" value={value2 ? value2 : 0} id="return_rate" onChange={({ target: { value: radius } }) => {
-                onChange2(radius); test();
+                onChange2(radius);
               }} ></input>
                 </div>
                 <input type="range" min="1" id="invest2" value={value2 ? value2 : 0} max="30" className="range" onChange={({ target: { value: radius } }) => {
@@ -98,21 +146,21 @@ function EMICalculator() {
                <div className="inputfield">
                   <label htmlFor="invest3">Time Period (in Months)</label>
                   <input className="right" type="text" value={value3 ? value3 : 0} id="time_period" onChange={({ target: { value: radius } }) => {
-                onChange3(radius); test();
+                onChange3(radius);
               }}></input>
                 </div>
                 <input type="range" min="1" id="invest3" value={value3 ? value3 : 0} max="30" className="range" onChange={({ target: { value: radius } }) => {
-                onChange3(radius); test();
+                onChange3(radius);
               }}></input>
                <br />
                <br />
-               <span id="totalInvestment"> Amount:<strong>₹ {value1}</strong></span>
+               <span className="totalInvestment"> Amount:<strong>₹ {value1}</strong></span>
                <br />
                <br />
-               <span id="future"> EMI:<strong>₹ {total}</strong></span>
+               <span className="totalInvestment"> EMI:<strong>₹ {total}</strong></span>
                <br />
                <br />
-               <span id="interest"> Total Interest:<strong>₹ {interest}</strong></span>
+               <span className="totalInvestment"> Total Interest:<strong>₹ {interest}</strong></span>
                <br />
                <br />
               </form>

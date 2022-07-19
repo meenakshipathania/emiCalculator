@@ -45,13 +45,38 @@ function PPFCal() {
   ],
     
   };
-  function test() {
-    document.querySelector('#dou1').classList.add("hide");
-    document.querySelector('#dou2').classList.add("show");
-    document.querySelector('#dou1').classList.remove("show");
+  // function test() {
+  //   document.querySelector('#dou1').classList.add("hide");
+  //   document.querySelector('#dou2').classList.add("show");
+  //   document.querySelector('#dou1').classList.remove("show");
+  //   }
+ 
+  function functionOne(e) {
+    let value = +e.target.value;
+    if (value === 2) {
+      window.location.href = "/SIPCalculator";
+    } else if (value === 3) {
+      window.location.href = "/Lumpsum";
+    } else if (value === 4) {
+      window.location.href = "/mutual";
+    } else if (value === 5) {
+      window.location.href = "/PPFCalculator";
+    } else if (value === 6) {
+      window.location.href = "/SWPCalculator";
+    } else if (value === 7) {
+      window.location.href = "/FDCalculator";
+    } else if (value === 8) {
+      window.location.href = "/RDCalculator";
+    } else if (value === 9) {
+      window.location.href = "/HRACalculator";
+    } else if (value === 10) {
+      window.location.href = "/EMICalculator";
+    } else if (value === 11) {
+      window.location.href = "/NPSCalculator";
+    } else {
+      window.location.href = "/SIPCalculator";
     }
- 
- 
+  }
   return (
     <>
       <div className="container">
@@ -68,6 +93,26 @@ function PPFCal() {
             <a href="/EMICalculator">EMI Calculator</a>
             <a href="/RDCalculator">NPS Calculator</a>
           </div>
+          <div className="drop">
+            <select
+              className="droplist"
+              onChange={(e) => {
+                functionOne(e);
+              }}
+            >
+              <option value="1">Calculator</option>
+              <option value="2">SIP Calculator</option>
+              <option value="3">Lump Sum Calculator</option>
+              <option value="4">Mutual Fund Calculator</option>
+              <option value="5">PPF Calculator</option>
+              <option value="6">SWP Calculator</option>
+              <option value="7">FD Calculator</option>
+              <option value="8">RD Calculator</option>
+              <option value="9">HRA Calculator</option>
+              <option value="10">EMI Calculator</option>
+              <option value="11">NPS Calculator</option>
+            </select>
+          </div>
           <div className="calculation">
             <div className="calculator">
             <h1 className="heading">PPF Calculator</h1>
@@ -77,43 +122,43 @@ function PPFCal() {
                 <div className="inputfield">
                   <label htmlFor="invest1">Yearly Investment</label>
                   <input className="right" type="text" value={value1 ? value1 : 1} id="monthly_investment" onChange={({ target: { value: radius } }) => {
-                onChange1(radius); test();
+                onChange1(radius);
               }}></input>
                 </div>
-                <input type="range" min="1" id="invest1" value={value1 ? value1 : 1} max="200000" className="range" onChange={({ target: { value: radius } }) => {
-                onChange1(radius); test();
+                <input type="range" min="500" step="500" id="invest1" value={value1 ? value1 : 1} max="200000" className="range" onChange={({ target: { value: radius } }) => {
+                onChange1(radius);
               }}></input>
               <br />
               <br />
               <div className="inputfield">
                   <label htmlFor="invest2"> Expected Return Rate (in %)</label>
                   <input className="right" type="text" value={value2 ? value2 : 0} id="return_rate" onChange={({ target: { value: radius } }) => {
-                onChange2(radius); test();
+                onChange2(radius);
               }} ></input>
                 </div>
-                <input type="range" min="1" id="invest2" value={value2 ? value2 : 0} max="30" className="range" onChange={({ target: { value: radius } }) => {
-                onChange2(radius); test();
+                <input type="range" min="1" step="0.5" id="invest2" value={value2 ? value2 : 0} max="30" className="range" onChange={({ target: { value: radius } }) => {
+                onChange2(radius);
               }}></input>
                <br />
                <br />
                <div className="inputfield">
                   <label htmlFor="invest3">Time Period (in years)</label>
                   <input className="right" type="text" value={value3 ? value3 : 0} id="time_period" onChange={({ target: { value: radius } }) => {
-                onChange3(radius); test();
+                onChange3(radius);
               }}></input>
                 </div>
-                <input type="range" min="1" id="invest3" value={value3 ? value3 : 0} max="30" className="range" onChange={({ target: { value: radius } }) => {
-                onChange3(radius); test();
+                <input type="range" min="1" id="invest3" value={value3 ? value3 : 0} max="30" step="1" className="range" onChange={({ target: { value: radius } }) => {
+                onChange3(radius);
               }}></input>
               <br />
                <br />
-               <span id="totalInvestment"> Invested Amount:<strong>₹ {investment}</strong></span>
+               <span className="totalInvestment"> Invested Amount:<strong>₹ {investment}</strong></span>
                <br />
                <br />
-               <span> Estimated Return:<strong>₹ {returns}</strong></span>
+               <span className="totalInvestment"> Estimated Return:<strong>₹ {returns}</strong></span>
                <br />
                <br />
-               <span> Total value:<strong>₹ {futureValue}</strong></span>
+               <span className="totalInvestment"> Total value:<strong>₹ {futureValue}</strong></span>
                <br />
                <br />
               </form>

@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import "./App.css";
-// import MutualFund from "./MutualFund";
 import { Chart, Tooltip, Title, ArcElement, Legend} from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
 Chart.register(
@@ -8,36 +7,34 @@ Chart.register(
 );
 
 function RDCal() {
-  const [value1, onChange1] = useState(1);
-  const [value2, onChange2] = useState(1);
-  const [value3, onChange3] = useState(1);
-  
-  var months = value3 * 12;  
-  const investment = value1 * months;
-  let futureValue = 0;
-  let Est_return = 0;
-  for (let i = 1; i <= months; i++) {
-    const Nt = (4 * i * value3) / months;
+  const [value1, onChange1] = useState(10000);
+  const [value2, onChange2] = useState(5);
+  const [value3, onChange3] = useState(5);
 
-    const rate = 1 + value2 / 100 / 4;
-    const t = Math.pow(rate, Nt);
-    Est_return = +value1 * t
-    Est_return = Math.round(Est_return);
-    futureValue = +futureValue + Est_return;
-  }  
-  const data = {
-    labels: [
-      'Amount',
-      'Interest',
-      'Total Years'
-  ],
-    datasets: [{
-        data: [value1, value2, value3],
-        backgroundColor: ['#17BFB5','#37578a','#b4294e'],
-    }
-  ],
+  let rate = value2 / 400;
+  let months = value3 * 12;
+  let investment=months*value1;
+  let value = 0;
+  for (let i = months; i>0; i--){
+    let future = value1 * Math.pow(1 + rate, (4 * i)/months);
+    future = Math.round(future);
+    value=value+future;
+  }
+  let returns = value-investment;
+
+  // const data = {
+  //   labels: [
+  //     'Amount',
+  //     'Interest',
+  //     'Total Years'
+  // ],
+  //   datasets: [{
+  //       data: [value1, value2, value3],
+  //       backgroundColor: ['#17BFB5','#37578a','#b4294e'],
+  //   }
+  // ],
     
-  };
+  // };
   
   const datashow = {
     labels: [
@@ -46,89 +43,140 @@ function RDCal() {
       'Future Value'
   ],
     datasets: [{
-        data: [investment, Est_return, futureValue ],
+        data: [value1, returns, value ],
         backgroundColor: ['#17BFB5','#37578a','#b4294e'],
     }
   ],
     
   };
 
-  function test() {
-  document.querySelector('#dou1').classList.add("hide");
-  document.querySelector('#dou2').classList.add("show");
-  document.querySelector('#dou1').classList.remove("show");
+  // function test() {
+  // document.querySelector('#dou1').classList.add("hide");
+  // document.querySelector('#dou2').classList.add("show");
+  // document.querySelector('#dou1').classList.remove("show");
+  // }
+  function functionOne(e) {
+    let value = +e.target.value;
+    if (value === 2) {
+      window.location.href = "/SIPCalculator";
+    } else if (value === 3) {
+      window.location.href = "/Lumpsum";
+    } else if (value === 4) {
+      window.location.href = "/mutual";
+    } else if (value === 5) {
+      window.location.href = "/PPFCalculator";
+    } else if (value === 6) {
+      window.location.href = "/SWPCalculator";
+    } else if (value === 7) {
+      window.location.href = "/FDCalculator";
+    } else if (value === 8) {
+      window.location.href = "/RDCalculator";
+    } else if (value === 9) {
+      window.location.href = "/HRACalculator";
+    } else if (value === 10) {
+      window.location.href = "/EMICalculator";
+    } else if (value === 11) {
+      window.location.href = "/NPSCalculator";
+    } else {
+      window.location.href = "/SIPCalculator";
+    }
   }
- 
   return (
     <>
-      <div className="container col-12">
+      <div className="container">
         <div className="row">
-          <div className="menu col-xs-12 col-sm-3">
-            <ul>
-              <li><a href="/">EMI Calculator</a></li>
-              <li><a href="mutual">Mutual Fund Calculator</a></li>
-              <li><a href="PPFCalculator">PPF Calculator</a></li>
-              <li><a href="FDCalculator">FD Calculator</a></li>
-              <li><a href="RDCalculator">RD Calculator</a></li>
-              <li><a href="Lumpsum">Lump Sum Calculator</a></li>
-              <li><a href="SIPCalculator">SIP Calculator</a></li>
-            </ul>
+          <div className="menu marg">
+          <a href="/SIPCalculator">SIP Calculator</a>
+            <a href="/Lumpsum">Lump Sum Calculator</a>
+            <a href="/mutual">Mutual Fund Calculator</a>
+            <a href="/PPFCalculator">PPF Calculator</a>
+            <a href="/SWPCalculator">SWP Calculator</a>
+            <a href="/FDCalculator">FD Calculator</a>
+            <a href="/RDCalculator">RD Calculator</a>
+            <a href="/HRACalculator">HRA Calculator</a>
+            <a href="/EMICalculator">EMI Calculator</a>
+            <a href="/NPSCalculator">NPS Calculator</a>
           </div>
-          <div className="calculation  col-xs-12 col-sm-9">
-            <div className="row head">
-            <h1 className="heading">RD Calculator</h1>
-            <div className="calculate col-md-6 col-sm-6">
+          <div className="drop">
+            <select
+              className="droplist"
+              onChange={(e) => {
+                functionOne(e);
+              }}
+            >
+              <option value="1">Calculator</option>
+              <option value="2">SIP Calculator</option>
+              <option value="3">Lump Sum Calculator</option>
+              <option value="4">Mutual Fund Calculator</option>
+              <option value="5">PPF Calculator</option>
+              <option value="6">SWP Calculator</option>
+              <option value="7">FD Calculator</option>
+              <option value="8">RD Calculator</option>
+              <option value="9">HRA Calculator</option>
+              <option value="10">EMI Calculator</option>
+              <option value="11">NPS Calculator</option>
+            </select>
+          </div>
+          <div className="calculation">
+            <div className="calculator">
+            <h2 className="heading">RD Calculator</h2>
+            <div className="inner_container">
+              <div className="half">
               <form action="/" method="post">
                 <div className="inputfield">
                   <label htmlFor="invest1">Total Investment</label>
                   <input className="right" type="text" value={value1 ? value1 : 1} id="monthly_investment" onChange={({ target: { value: radius } }) => {
-                onChange1(radius); test();
+                onChange1(radius);
               }}></input>
                 </div>
                 <input type="range" min="1" id="invest1" step="1000" value={value1 ? value1 : 1} max="200000" className="range" onChange={({ target: { value: radius } }) => {
-                onChange1(radius); test();
+                onChange1(radius);
               }}></input>
               <br />
               <br />
               <div className="inputfield">
                   <label htmlFor="invest2">Return Rate (in %)</label>
                   <input className="right" type="text" value={value2 ? value2 : 0} id="return_rate" onChange={({ target: { value: radius } }) => {
-                onChange2(radius); test();
+                onChange2(radius);
               }}></input>
                 </div>
                 <input type="range" min="1" id="invest2" value={value2 ? value2 : 0} max="30" className="range" onChange={({ target: { value: radius } }) => {
-                onChange2(radius); test();
+                onChange2(radius);
               }}></input>
                <br />
                <br />
                <div className="inputfield">
-                  <label htmlFor="invest3">Time Period (in Months)</label>
+                  <label htmlFor="invest3">Time Period (in Years)</label>
                   <input className="right" type="text" value={value3 ? value3 : 0} id="time_period" onChange={({ target: { value: radius } }) => {
-                onChange3(radius); test();
+                onChange3(radius);
               }}></input>
                 </div>
                 <input type="range" min="1" id="invest3" value={value3 ? value3 : 0} max="30" className="range" onChange={({ target: { value: radius } }) => {
-                onChange3(radius); test();
+                onChange3(radius);
               }}></input>
                <br />
                <br />
-               <span id="totalInvestment"> Total Investment:₹ {investment}</span>
+               <span className="totalInvestment"> Total Investment:<strong>₹ {investment}</strong></span>
                <br />
                <br />
-               <span> Total Return:₹ {Est_return}</span>
+               <span className="totalInvestment"> Total Return:<strong>₹ {returns}</strong></span>
                <br />
                <br />
-               <span> Future value:₹ {futureValue}</span>
+               <span className="totalInvestment"> Future value:<strong>₹ {value}</strong></span>
                <br />
                <br />
               </form>
-            </div>
-            <div className="chart mutu col-md-6 col-sm-6 show" id="dou1">
+              </div>
+              <div className="half">
+              {/* <div className="chart mutu col-md-6 col-sm-6 show" id="dou1">
               <Doughnut data={data}></Doughnut>
-            </div>
-            <div className="chart mutu col-md-6 hide" id="dou2">
+            </div> */}
+            <div className="chart mutu" id="dou2">
               <Doughnut data={datashow}></Doughnut>
             </div>
+            </div>
+            </div>
+           
             </div>
           </div>
         </div>

@@ -15,7 +15,8 @@ import FDCal from './FDCalculator';
 import RDCal from './RDCalculator';
 import Lumpsum from './LumpsumCalculator';
 import SIPCal from './SIPCalculator';
-
+import NPSCal from './NPSCalculator';
+import HRACal from './HRACalculator';
 
 ReactDOM.render(
   <Router>
@@ -30,6 +31,8 @@ ReactDOM.render(
       <Route path="/RDCalculator" element={<RDCal />} />
       <Route path="/Lumpsum" element={<Lumpsum />} />
       <Route path="/SIPCalculator" element={<SIPCal />} />
+      <Route path="/NPSCalculator" element={<NPSCal />} />
+      <Route path="/HRACalculator" element={<HRACal />} />
       {/* </Route> */}
     </Routes>
 

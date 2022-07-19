@@ -4,42 +4,49 @@ import { Chart, Tooltip, Title, ArcElement, Legend } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
 Chart.register(Tooltip, Title, ArcElement, Legend);
 
-function Lumpsum() {
-  const [value1, onChange1] = useState(5000);
+function NPSCal() {
+  let [value1, onChange1] = useState(10000);
   const [value2, onChange2] = useState(12);
-  const [value3, onChange3] = useState(5);
+  const [value3, onChange3] = useState(18);
 
-  let rate = value2 / 100;
-  const est_returns = 1 + rate;
-  const total_return = Math.pow(est_returns, value3);
-  const future_value = parseInt(value1 * total_return);
-  const returns = future_value - value1;
+ let pending_time = 60-value3;
+ let rate = value2 / 12 / 100;
+ let months = pending_time * 12;
+ let total = value1 * value3 * 12;
+ let futureValue = value1 * ((Math.pow(1 + rate, months) - 1) / rate) * ( 1 + rate);
+ futureValue = Math.round(futureValue);
+ let returns = futureValue - total;
+ let maturity = Math.floor(futureValue * 0.6);
+ let annuity = Math.floor(futureValue * 0.4);
 
   // const data = {
-  //   labels: ["Amount", "Interest", "Total Years"],
-  //   datasets: [
-  //     {
-  //       data: [value1, value2, value3],
-  //       backgroundColor: ["#17BFB5", "#37578a", "#b4294e"],
-  //     },
-  //   ],
-  // };
+  //   labels: [
+  //     'Amount',
+  //     'Interest',
+  //     'Total Years'
+  // ],
+  //   datasets: [{
+  //       data: [value1,value2,value3],
+  //       backgroundColor: ['#17BFB5','#37578a','#b4294e'],
+  //   }
+  // ],
 
+  // };
   const datashow = {
-    labels: ["Investment", "Return", "Total Value"],
+    labels: ["Investment", "Return"],
     datasets: [
       {
-        data: [value1, returns, future_value],
-        backgroundColor: ["#17BFB5", "#37578a", "#b4294e"],
+        data: [total, returns],
+        backgroundColor: ["#17BFB5", "#37578a"],
       },
     ],
   };
+
   // function test() {
   //   document.querySelector("#dou1").classList.add("hide");
   //   document.querySelector("#dou2").classList.add("show");
   //   document.querySelector("#dou1").classList.remove("show");
   // }
-
   function functionOne(e) {
     let value = +e.target.value;
     if (value === 2) {
@@ -66,6 +73,7 @@ function Lumpsum() {
       window.location.href = "/SIPCalculator";
     }
   }
+
   return (
     <>
       <div className="container">
@@ -78,9 +86,9 @@ function Lumpsum() {
             <a href="/SWPCalculator">SWP Calculator</a>
             <a href="/FDCalculator">FD Calculator</a>
             <a href="/RDCalculator">RD Calculator</a>
-            <a href="/FDCalculator">HRA Calculator</a>
+            <a href="/HRACalculator">HRA Calculator</a>
             <a href="/EMICalculator">EMI Calculator</a>
-            <a href="/RDCalculator">NPS Calculator</a>
+            <a href="/NPSCalculator">NPS Calculator</a>
           </div>
           <div className="drop">
             <select
@@ -104,12 +112,13 @@ function Lumpsum() {
           </div>
           <div className="calculation">
             <div className="calculator">
-              <h1 className="heading">Lump Sum Calculator</h1>
+              {/* <div className="row head"> */}
+              <h2 className="heading">NPS Calculator</h2>
               <div className="inner_container">
                 <div className="half">
                   <form action="/" method="post">
                     <div className="inputfield">
-                      <label htmlFor="invest1">Total Investment</label>
+                      <label htmlFor="invest1">Investment Per Month</label>
                       <input
                         className="right"
                         type="text"
@@ -122,12 +131,12 @@ function Lumpsum() {
                     </div>
                     <input
                       type="range"
-                      min="500"
+                      className="range"
                       step="500"
+                      min="1"
                       id="invest1"
                       value={value1 ? value1 : 1}
                       max="200000"
-                      className="range"
                       onChange={({ target: { value: radius } }) => {
                         onChange1(radius);
                       }}
@@ -135,7 +144,9 @@ function Lumpsum() {
                     <br />
                     <br />
                     <div className="inputfield">
-                      <label htmlFor="invest2"> Expected Return Rate (in %)</label>
+                      <label htmlFor="invest2">
+                        Expected Return Rate (in %)
+                      </label>
                       <input
                         className="right"
                         type="text"
@@ -152,7 +163,6 @@ function Lumpsum() {
                       id="invest2"
                       value={value2 ? value2 : 0}
                       max="30"
-                      step="0.5"
                       className="range"
                       onChange={({ target: { value: radius } }) => {
                         onChange2(radius);
@@ -161,7 +171,7 @@ function Lumpsum() {
                     <br />
                     <br />
                     <div className="inputfield">
-                      <label htmlFor="invest3">Time Period (in years)</label>
+                      <label htmlFor="invest3">Your Age</label>
                       <input
                         className="right"
                         type="text"
@@ -178,7 +188,6 @@ function Lumpsum() {
                       id="invest3"
                       value={value3 ? value3 : 0}
                       max="30"
-                      step="1"
                       className="range"
                       onChange={({ target: { value: radius } }) => {
                         onChange3(radius);
@@ -187,28 +196,38 @@ function Lumpsum() {
                     <br />
                     <br />
                     <span className="totalInvestment">
-                      Invested Amount:<strong>₹ {value1}</strong>
+                      Invested Amount:<strong>₹ {total}</strong>
                     </span>
                     <br />
                     <br />
-                    <span className="totalInvestment"> Estimated returns:<strong>₹ {returns}</strong></span>
+                    <span className="totalInvestment">
+                      interest Earned:<strong>₹ {returns}</strong>
+                    </span>
                     <br />
                     <br />
-                    <span className="totalInvestment"> Total value:<strong>₹ {future_value}</strong></span>
+                    <span className="totalInvestment">
+                      Maturity Amount:<strong>₹ {maturity}</strong>
+                    </span>
+                    <br />
+                    <br />
+                    <span className="totalInvestment">
+                      Annuity Amount:<strong>₹ {annuity}</strong>
+                    </span>
                     <br />
                     <br />
                   </form>
                 </div>
                 <div className="half">
-                {/* <div className="chart mutu show" id="dou1">
-                <Doughnut data={data}></Doughnut>
-              </div> */}
-              <div className="chart mutu" id="dou2">
-                <Doughnut data={datashow}></Doughnut>
-              </div>
+                  {/* <div className="chart mutu show" id="dou1">
+              <Doughnut data={data}></Doughnut>
+            </div> */}
+                  <div className="chart mutu" id="dou2">
+                    <Doughnut data={datashow}></Doughnut>
+                  </div>
                 </div>
               </div>
-              
+
+              {/* </div> */}
             </div>
           </div>
         </div>
@@ -217,4 +236,4 @@ function Lumpsum() {
   );
 }
 
-export default Lumpsum;
+export default NPSCal;
