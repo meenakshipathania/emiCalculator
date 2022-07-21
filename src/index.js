@@ -2,9 +2,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import './main.css';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import {createRoot} from 'react-dom/client';
 // import * as serviceWorker from "./serviceWorker";
 import React from 'react';
-import ReactDOM from "react-dom";
+// import ReactDOM from "react-dom";
 import './index.css';
 import App from './App';
 import EMICalculator from './EMICalculator';
@@ -18,7 +19,11 @@ import SIPCal from './SIPCalculator';
 import NPSCal from './NPSCalculator';
 import HRACal from './HRACalculator';
 
-ReactDOM.render(
+
+const rootElement = document.getElementById('root');
+const root = createRoot(rootElement);
+
+root.render(
   <Router>
     {/* <Navigation /> */}
     <Routes>
@@ -38,5 +43,5 @@ ReactDOM.render(
 
   </Router>,
 
-  document.getElementById("root")
+  // document.getElementById("root")
 );
