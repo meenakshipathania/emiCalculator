@@ -30,7 +30,7 @@ function Lumpsum() {
     datasets: [
       {
         data: [value1, returns, future_value],
-        backgroundColor: ["#17BFB5", "#37578a", "#b4294e"],
+        backgroundColor: ["#3498eb", "#37578a", "#f2556f"],
       },
     ],
   };
@@ -40,47 +40,48 @@ function Lumpsum() {
   //   document.querySelector("#dou1").classList.remove("show");
   // }
 
+ 
   function functionOne(e) {
     let value = +e.target.value;
     if (value === 2) {
-      window.location.href = "/SIPCalculator";
+      window.location.href = "/";
     } else if (value === 3) {
-      window.location.href = "/Lumpsum";
+      window.location.href = "#/Lumpsum";
     } else if (value === 4) {
-      window.location.href = "/mutual";
+      window.location.href = "#/mutual";
     } else if (value === 5) {
-      window.location.href = "/PPFCalculator";
+      window.location.href = "#/PPFCalculator";
     } else if (value === 6) {
-      window.location.href = "/SWPCalculator";
+      window.location.href = "#/SWPCalculator";
     } else if (value === 7) {
-      window.location.href = "/FDCalculator";
+      window.location.href = "#/FDCalculator";
     } else if (value === 8) {
-      window.location.href = "/RDCalculator";
+      window.location.href = "#/RDCalculator";
     } else if (value === 9) {
-      window.location.href = "/HRACalculator";
+      window.location.href = "#/HRACalculator";
     } else if (value === 10) {
-      window.location.href = "/EMICalculator";
+      window.location.href = "#/EMICalculator";
     } else if (value === 11) {
-      window.location.href = "/NPSCalculator";
+      window.location.href = "#/NPSCalculator";
     } else {
-      window.location.href = "/SIPCalculator";
+      window.location.href = "#/SIPCalculator";
     }
   }
   return (
     <>
-      <div className="container">
+      <div className="container mar">
         <div className="row">
           <div className="menu marg">
-            <a href="/SIPCalculator">SIP Calculator</a>
-            <a href="/Lumpsum">Lump Sum Calculator</a>
-            <a href="/mutual">Mutual Fund Calculator</a>
-            <a href="/PPFCalculator">PPF Calculator</a>
-            <a href="/SWPCalculator">SWP Calculator</a>
-            <a href="/FDCalculator">FD Calculator</a>
-            <a href="/RDCalculator">RD Calculator</a>
-            <a href="/FDCalculator">HRA Calculator</a>
-            <a href="/EMICalculator">EMI Calculator</a>
-            <a href="/RDCalculator">NPS Calculator</a>
+          <a href="/">SIP Calculator</a>
+            <a href="#/Lumpsum">Lump Sum Calculator</a>
+            <a href="#/mutual">Mutual Fund Calculator</a>
+            <a href="#/PPFCalculator">PPF Calculator</a>
+            <a href="#/SWPCalculator">SWP Calculator</a>
+            <a href="#/FDCalculator">FD Calculator</a>
+            <a href="#/RDCalculator">RD Calculator</a>
+            <a href="#/HRACalculator">HRA Calculator</a> 
+            <a href="#/EMICalculator">EMI Calculator</a>
+            <a href="#/NPSCalculator">NPS Calculator</a>
           </div>
           <div className="drop">
             <select
@@ -104,13 +105,15 @@ function Lumpsum() {
           </div>
           <div className="calculation">
             <div className="calculator">
-              <h1 className="heading">Lump Sum Calculator</h1>
+              <h2 className="heading">Lump Sum Calculator</h2>
               <div className="inner_container">
                 <div className="half">
-                  <form action="/" method="post">
+                  {/* <form action="/" method="post"> */}
                     <div className="inputfield">
-                      <label htmlFor="invest1">Total Investment</label>
-                      <input
+                      <p>Total Investment</p>
+                      <div className="secondLabel">
+                        <p className="labelPara">₹</p>
+                        <input
                         className="right"
                         type="text"
                         value={value1 ? value1 : 1}
@@ -119,6 +122,7 @@ function Lumpsum() {
                           onChange1(radius);
                         }}
                       ></input>
+                      </div> 
                     </div>
                     <input
                       type="range"
@@ -135,7 +139,8 @@ function Lumpsum() {
                     <br />
                     <br />
                     <div className="inputfield">
-                      <label htmlFor="invest2"> Expected Return Rate (in %)</label>
+                      <p>Expected Return Rate</p>
+                      <div className="secondLabel">
                       <input
                         className="right"
                         type="text"
@@ -145,6 +150,8 @@ function Lumpsum() {
                           onChange2(radius);
                         }}
                       ></input>
+                       <p className="labelPara">%</p>
+                      </div>  
                     </div>
                     <input
                       type="range"
@@ -161,7 +168,8 @@ function Lumpsum() {
                     <br />
                     <br />
                     <div className="inputfield">
-                      <label htmlFor="invest3">Time Period (in years)</label>
+                      <p>Time Period</p>
+                      <div className="secondLabel">
                       <input
                         className="right"
                         type="text"
@@ -171,6 +179,9 @@ function Lumpsum() {
                           onChange3(radius);
                         }}
                       ></input>
+                      <p className="labelPara">Yr</p>
+                      </div>
+                      
                     </div>
                     <input
                       type="range"
@@ -187,17 +198,17 @@ function Lumpsum() {
                     <br />
                     <br />
                     <span className="totalInvestment">
-                      Invested Amount:<strong>₹ {value1}</strong>
+                      Invested Amount:- <strong>₹{value1}</strong>
                     </span>
                     <br />
                     <br />
-                    <span className="totalInvestment"> Estimated returns:<strong>₹ {returns}</strong></span>
+                    <span className="totalInvestment">Estimated returns:- <strong>₹{returns}</strong></span>
                     <br />
                     <br />
-                    <span className="totalInvestment"> Total value:<strong>₹ {future_value}</strong></span>
+                    <span className="totalInvestment">Total value:- <strong>₹{future_value}</strong></span>
                     <br />
                     <br />
-                  </form>
+                  {/* </form> */}
                 </div>
                 <div className="half">
                 {/* <div className="chart mutu show" id="dou1">

@@ -11,7 +11,7 @@ function App() {
   function functionOne(e) {
     let value = +e.target.value;
     if (value === 2) {
-      window.location.href = "/SIPCalculator";
+      window.location.href = "/";
     } else if (value === 3) {
       window.location.href = "/Lumpsum";
     } else if (value === 4) {
@@ -40,16 +40,16 @@ function App() {
       <div className="container">
         <div className="row">
           <div className="menu main">
-            <a href="/SIPCalculator">SIP Calculator</a>
-            <a href="/Lumpsum">Lump Sum Calculator</a>
-            <a href="/mutual">Mutual Fund Calculator</a>
-            <a href="/PPFCalculator">PPF Calculator</a>
-            <a href="/SWPCalculator">SWP Calculator</a>
-            <a href="/FDCalculator">FD Calculator</a>
-            <a href="/RDCalculator">RD Calculator</a>
-            <a href="/FDCalculator">HRA Calculator</a> 
-            <a href="/EMICalculator">EMI Calculator</a>
-            <a href="/RDCalculator">NPS Calculator</a>
+          <a href="/">SIP Calculator</a>
+            <a href="#/Lumpsum">Lump Sum Calculator</a>
+            <a href="#/mutual">Mutual Fund Calculator</a>
+            <a href="#/PPFCalculator">PPF Calculator</a>
+            <a href="#/SWPCalculator">SWP Calculator</a>
+            <a href="#/FDCalculator">FD Calculator</a>
+            <a href="#/RDCalculator">RD Calculator</a>
+            <a href="#/HRACalculator">HRA Calculator</a> 
+            <a href="#/EMICalculator">EMI Calculator</a>
+            <a href="#/NPSCalculator">NPS Calculator</a>
           </div>
           <div className="drop">
             <select

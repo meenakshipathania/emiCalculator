@@ -16,7 +16,7 @@ function SWPCal() {
   let value=value1;
   let rate = value2 / 12 / 100;
   let months = value3*12;
-  for (let i =0; i< months; i++){
+  for (let i = 0; i< months; i++){
      value = value-value4;
      let total=value*rate;
      value=value + total;
@@ -45,7 +45,7 @@ let Withdrawal = value4*value3*12;
   ],
     datasets: [{
         data: [ value1, Withdrawal, value ],
-        backgroundColor: ['#17BFB5','#37578a','#b4294e'],
+        backgroundColor: ['#3498eb','#37578a','#f2556f'],
     }
   ],
     
@@ -56,48 +56,49 @@ let Withdrawal = value4*value3*12;
   //   document.querySelector('#dou1').classList.remove("show");
   //   }
  
+  
   function functionOne(e) {
     let value = +e.target.value;
     if (value === 2) {
-      window.location.href = "/SIPCalculator";
+      window.location.href = "/";
     } else if (value === 3) {
-      window.location.href = "/Lumpsum";
+      window.location.href = "#/Lumpsum";
     } else if (value === 4) {
-      window.location.href = "/mutual";
+      window.location.href = "#/mutual";
     } else if (value === 5) {
-      window.location.href = "/PPFCalculator";
+      window.location.href = "#/PPFCalculator";
     } else if (value === 6) {
-      window.location.href = "/SWPCalculator";
+      window.location.href = "#/SWPCalculator";
     } else if (value === 7) {
-      window.location.href = "/FDCalculator";
+      window.location.href = "#/FDCalculator";
     } else if (value === 8) {
-      window.location.href = "/RDCalculator";
+      window.location.href = "#/RDCalculator";
     } else if (value === 9) {
-      window.location.href = "/HRACalculator";
+      window.location.href = "#/HRACalculator";
     } else if (value === 10) {
-      window.location.href = "/EMICalculator";
+      window.location.href = "#/EMICalculator";
     } else if (value === 11) {
-      window.location.href = "/NPSCalculator";
+      window.location.href = "#/NPSCalculator";
     } else {
-      window.location.href = "/SIPCalculator";
+      window.location.href = "#/SIPCalculator";
     }
   }
 
   return (
     <>
-      <div className="container">
+      <div className="container mar">
         <div className="row">
           <div className="menu marg">
-            <a href="/SIPCalculator">SIP Calculator</a>
-            <a href="/Lumpsum">Lump Sum Calculator</a>
-            <a href="/mutual">Mutual Fund Calculator</a>
-            <a href="/PPFCalculator">PPF Calculator</a>
-            <a href="/SWPCalculator">SWP Calculator</a>
-            <a href="/FDCalculator">FD Calculator</a>
-            <a href="/RDCalculator">RD Calculator</a>
-            <a href="/FDCalculator">HRA Calculator</a> 
-            <a href="/EMICalculator">EMI Calculator</a>
-            <a href="/RDCalculator">NPS Calculator</a>
+          <a href="/">SIP Calculator</a>
+            <a href="#/Lumpsum">Lump Sum Calculator</a>
+            <a href="#/mutual">Mutual Fund Calculator</a>
+            <a href="#/PPFCalculator">PPF Calculator</a>
+            <a href="#/SWPCalculator">SWP Calculator</a>
+            <a href="#/FDCalculator">FD Calculator</a>
+            <a href="#/RDCalculator">RD Calculator</a>
+            <a href="#/HRACalculator">HRA Calculator</a> 
+            <a href="#/EMICalculator">EMI Calculator</a>
+            <a href="#/NPSCalculator">NPS Calculator</a>
           </div>
           <div className="drop">
             <select
@@ -121,15 +122,17 @@ let Withdrawal = value4*value3*12;
           </div>
           <div className="calculation">
             <div className="calculator">
-            <h1 className="heading">SWP Calculator</h1>
+            <h2 className="heading">SWP Calculator</h2>
             <div className="inner_container">
               <div className="half">
-              <form action="/" method="post">
                 <div className="inputfield">
-                  <label htmlFor="invest1">Total Investment</label>
-                  <input className="right" type="text" value={value1 ? value1 : 1} id="monthly_investment" onChange={({ target: { value: radius } }) => {
+                  <p>Total Investment</p>
+                  <div className="secondLabel">
+                    <p className="labelPara">₹</p> 
+                   <input className="right" type="text" value={value1 ? value1 : 1} id="monthly_investment" onChange={({ target: { value: radius } }) => {
                 onChange1(radius);
               }}></input>
+                </div>
                 </div>
                 <input type="range" min="10000" step="500" id="invest1" value={value1 ? value1 : 1} max="5000000" className="range" onChange={({ target: { value: radius } }) => {
                 onChange1(radius);
@@ -137,10 +140,13 @@ let Withdrawal = value4*value3*12;
               <br />
               <br />
               <div className="inputfield">
-                  <label htmlFor="invest1">Withdrawal Per Month</label>
+                  <p>Withdrawal Per Month</p>
+                  <div className="secondLabel">
+                    <p className="labelPara">₹</p> 
                   <input className="right" type="text" value={value4 ? value4 : 0} id="monthly_investment" onChange={({ target: { value: radius } }) => {
                 onChange4(radius);
               }}></input>
+                </div>
                 </div>
                 <input type="range" min="500" step="500" id="invest1" value={value4 ? value4 : 0} max="50000" className="range" onChange={({ target: { value: radius } }) => {
                 onChange4(radius);
@@ -148,10 +154,13 @@ let Withdrawal = value4*value3*12;
               <br />
               <br />
               <div className="inputfield">
-                  <label htmlFor="invest2"> Expected Return Rate (in %)</label>
+                  <p>Expected Return Rate</p>
+                  <div className="secondLabel">
                   <input className="right" type="text" value={value2 ? value2 : 0} id="return_rate" onChange={({ target: { value: radius } }) => {
                 onChange2(radius);
               }} ></input>
+              <p className="labelPara">%</p>
+                </div>
                 </div>
                 <input type="range" min="1" step="0.5" id="invest2" value={value2 ? value2 : 0} max="30" className="range" onChange={({ target: { value: radius } }) => {
                 onChange2(radius);
@@ -159,26 +168,28 @@ let Withdrawal = value4*value3*12;
                <br />
                <br />
                <div className="inputfield">
-                  <label htmlFor="invest3">Time Period (in years)</label>
+                  <p>Time Period</p>
+                  <div className="secondLabel">
                   <input className="right" type="text" value={value3 ? value3 : 0} id="time_period" onChange={({ target: { value: radius } }) => {
                 onChange3(radius);
               }}></input>
+              <p className="labelPara">Yr</p>
+                </div>
                 </div>
                 <input type="range" min="1" step="1" id="invest3" value={value3 ? value3 : 0} max="30" className="range" onChange={({ target: { value: radius } }) => {
                 onChange3(radius);
               }}></input>
               <br />
                <br />
-               <span className="totalInvestment"> Invested Amount:<strong>₹ {value1}</strong></span>
+               <span className="totalInvestment"> Invested Amount:- <strong>₹{value1}</strong></span>
                <br />
                <br />
-               <span className="totalInvestment"> Total Withdrawal:<strong>₹ {Withdrawal}</strong></span>
+               <span className="totalInvestment"> Total Withdrawal:- <strong>₹{Withdrawal}</strong></span>
                <br />
                <br />
-               <span className="totalInvestment"> Total value:<strong>₹ {value}</strong></span>
+               <span className="totalInvestment"> Total value:- <strong>₹{value}</strong></span>
                <br />
                <br />
-              </form>
               </div>
               <div className="half">
               {/* <div className="chart mutu show" id="dou1">
@@ -187,10 +198,8 @@ let Withdrawal = value4*value3*12;
             <div className="chart mutu" id="dou2">
               <Doughnut data={datashow}></Doughnut>
             </div>
-              </div>
-              
+              </div>  
             </div>
-            
             </div>
           </div>
         </div>

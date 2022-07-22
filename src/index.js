@@ -7,7 +7,7 @@ import {createRoot} from 'react-dom/client';
 import React from 'react';
 // import ReactDOM from "react-dom";
 import './index.css';
-import App from './App';
+// import App from './App';
 import EMICalculator from './EMICalculator';
 import MutualFund from './MutualFund';
 import PPFCal from './PPFCalculator';
@@ -27,7 +27,8 @@ root.render(
   <Router>
     {/* <Navigation /> */}
     <Routes>
-      <Route path="/" element={<App />} />
+       <Route path="/" element={<SIPCal />} />
+      {/* <Route path="/" element={<App />} /> */}
       <Route path="/EMICalculator" element={<EMICalculator />} />
       <Route path="/mutual" element={<MutualFund />} />
       <Route path="/PPFcalculator" element={<PPFCal />} />
@@ -35,7 +36,6 @@ root.render(
       <Route path="/FDCalculator" element={<FDCal />} />
       <Route path="/RDCalculator" element={<RDCal />} />
       <Route path="/Lumpsum" element={<Lumpsum />} />
-      <Route path="/SIPCalculator" element={<SIPCal />} />
       <Route path="/NPSCalculator" element={<NPSCal />} />
       <Route path="/HRACalculator" element={<HRACal />} />
       {/* </Route> */}
