@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import "./App.css";
+import 'font-awesome/css/font-awesome.min.css';
 import { Chart, Tooltip, Title, ArcElement, Legend } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
 Chart.register(Tooltip, Title, ArcElement, Legend);
 
 function SIPCal() {
+  const [showResults, setShowResults] = React.useState(false);
   let [value1, onChange1] = useState(10000);
   const [value2, onChange2] = useState(12);
   const [value3, onChange3] = useState(5);
@@ -14,7 +16,9 @@ function SIPCal() {
   var investment = value1 * months;
   var futureValue = 0;
 
-  futureValue = (value1 * (1 + monthlyRate) * (Math.pow(1 + monthlyRate, months) - 1)) / monthlyRate;
+  futureValue =
+    (value1 * (1 + monthlyRate) * (Math.pow(1 + monthlyRate, months) - 1)) /
+    monthlyRate;
   futureValue = Math.round(futureValue);
   var returns = futureValue - investment;
 
@@ -74,6 +78,24 @@ function SIPCal() {
     }
   }
 
+
+  const Results = () => (
+    <div id="results" className="search-results">
+      <a href="http://www.facebook.com/sharer.php?s=100"><i class="fa fa-facebook-square" aria-hidden="true"></i> </a>
+      <a href="http://twitter.com/share?"><i class="fa fa-twitter-square" aria-hidden="true"></i> </a>
+      <a href="https://in.pinterest.com/login/"><i class="fa fa-pinterest-square" aria-hidden="true"></i> </a>
+    </div>
+  )
+  
+  // function myFunction() {
+  //   var x = document.getElementById("myDIV[0]");
+  //   if (x.style.display === "none") {
+  //     x.style.display = "block";
+  //   } else {
+  //     x.style.display = "none";
+  //   }
+  // }
+
   return (
     <>
       <div className="container mar">
@@ -115,12 +137,12 @@ function SIPCal() {
               <h2 className="heading">SIP Calculator</h2>
               <div className="inner_container">
                 <div className="half">
-                    <div className="inputfield">
-                      <p>Monthly Investment</p>
-                        <div className="secondLabel">
-                          <p className="labelPara">₹</p>               
-                        <input
-                        className="right"
+                  <div className="inputfield">
+                    <p>Monthly Investment</p>
+                    <div className="secondLabel">
+                      <p className="labelPara">₹</p>
+                      <input
+                        className="right paddi"
                         type="text"
                         value={value1 ? value1 : 1}
                         id="monthly_investment"
@@ -128,27 +150,26 @@ function SIPCal() {
                           onChange1(radius);
                         }}
                       ></input>
-                       </div>
-                     
                     </div>
-                    <input
-                      type="range"
-                      className="range"
-                      step="500"
-                      min="500"
-                      id="invest1"
-                      value={value1 ? value1 : 1}
-                      max="200000"
-                      onChange={({ target: { value: radius } }) => {
-                        onChange1(radius);
-                      }}
-                    ></input>
-                    <br />
-                    <br />
-                    <div className="inputfield">
-                      <p>Expected Return Rate</p>
-                        <div className="secondLabel">
-                        <input
+                  </div>
+                  <input
+                    type="range"
+                    className="range"
+                    step="500"
+                    min="500"
+                    id="invest1"
+                    value={value1 ? value1 : 1}
+                    max="200000"
+                    onChange={({ target: { value: radius } }) => {
+                      onChange1(radius);
+                    }}
+                  ></input>
+                  <br />
+                  <br />
+                  <div className="inputfield">
+                    <p>Expected Return Rate</p>
+                    <div className="secondLabel">
+                      <input
                         className="right"
                         type="text"
                         value={value2 ? value2 : 0}
@@ -156,29 +177,28 @@ function SIPCal() {
                         onChange={({ target: { value: radius } }) => {
                           onChange2(radius);
                         }}
-                      ></input>             
-                        <p className="labelPara">%</p>
-                       </div>
-                     
+                      ></input>
+                      <p className="labelPara">%</p>
                     </div>
-                    <input
-                      type="range"
-                      min="1"
-                      id="invest2"
-                      value={value2 ? value2 : 0}
-                      max="30"
-                      step="0.5"
-                      className="range"
-                      onChange={({ target: { value: radius } }) => {
-                        onChange2(radius);
-                      }}
-                    ></input>
-                    <br />
-                    <br />
-                    <div className="inputfield">
-                      <p>Time Period</p>
-                        <div className="secondLabel">
-                        <input
+                  </div>
+                  <input
+                    type="range"
+                    min="1"
+                    id="invest2"
+                    value={value2 ? value2 : 0}
+                    max="30"
+                    step="0.5"
+                    className="range"
+                    onChange={({ target: { value: radius } }) => {
+                      onChange2(radius);
+                    }}
+                  ></input>
+                  <br />
+                  <br />
+                  <div className="inputfield">
+                    <p>Time Period</p>
+                    <div className="secondLabel">
+                      <input
                         className="right"
                         type="text"
                         value={value3 ? value3 : 0}
@@ -187,45 +207,58 @@ function SIPCal() {
                           onChange3(radius);
                         }}
                       ></input>
-                          <p className="labelPara">Yr</p>               
-                       </div>
+                      <p className="labelPara">Yr</p>
                     </div>
-                    <input
-                      type="range"
-                      min="1"
-                      id="invest3"
-                      value={value3 ? value3 : 0}
-                      max="30"
-                      step="1"
-                      className="range"
-                      onChange={({ target: { value: radius } }) => {
-                        onChange3(radius);
-                      }}
-                    ></input>
-                    <br />
-                    <br />
-                    <span className="totalInvestment">
-                      Invested Amount:- <strong>₹{investment}</strong>
-                    </span>
-                    <br />
-                    <br />
-                    <span className="totalInvestment">
-                      Estimated Returns:- <strong>₹{returns}</strong>
-                    </span>
-                    <br />
-                    <br />
-                    <span className="totalInvestment">
-                      Total value:- <strong>₹{futureValue}</strong>
-                    </span>
-                    <br />
-                    <br />
+                  </div>
+                  <input
+                    type="range"
+                    min="1"
+                    id="invest3"
+                    value={value3 ? value3 : 0}
+                    max="30"
+                    step="1"
+                    className="range"
+                    onChange={({ target: { value: radius } }) => {
+                      onChange3(radius);
+                    }}
+                  ></input>
+                  <br />
+                  <br />
+                  <br />
+                  <div className="lower">
+                    <div className="totalInvestment">Invested Amount</div>
+                    <div className="totalInvestment">
+                      <strong>₹{investment}</strong>
+                    </div>
+                  </div>
+                  <br />
+                  <div className="lower">
+                    <div className="totalInvestment">Estimated Returns</div>
+                    <div className="totalInvestment">
+                      <strong>₹{returns}</strong>
+                    </div>
+                  </div>
+                  <br />
+                  <div className="lower">
+                    <div className="totalInvestment">Total value</div>
+                    <div className="totalInvestment">
+                      <strong>₹{futureValue}</strong>
+                    </div>
+                  </div>
+                  <br />
                 </div>
                 <div className="half">
                   {/* <div className="chart mutu show" id="dou1">
               <Doughnut data={data}></Doughnut>
             </div> */}
-                  <div className="chart mutu" id="dou2">
+                  <div className="chart" id="dou2">
                     <Doughnut data={datashow}></Doughnut>
+                  </div>
+                  <div className="bottom">
+                    <button type="button" onClick={() => setShowResults(currentShow => !currentShow)} className="butt">
+                      Share
+                    </button>
+                    { showResults ? <Results /> : null }
                   </div>
                 </div>
               </div>

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./App.css";
+import 'font-awesome/css/font-awesome.min.css';
 import { Chart, Tooltip, Title, ArcElement, Legend} from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
 Chart.register(
@@ -7,6 +8,7 @@ Chart.register(
 );
 
 function RDCal() {
+  const [showResults, setShowResults] = React.useState(false);
   const [value1, onChange1] = useState(10000);
   const [value2, onChange2] = useState(5);
   const [value3, onChange3] = useState(5);
@@ -49,6 +51,13 @@ function RDCal() {
   ],
     
   };
+  const Results = () => (
+    <div id="results" className="search-results">
+      <a href="http://www.facebook.com/sharer.php?s=100"><i class="fa fa-facebook-square" aria-hidden="true"></i> </a>
+      <a href="http://twitter.com/share?"><i class="fa fa-twitter-square" aria-hidden="true"></i> </a>
+      <a href="https://in.pinterest.com/login/"><i class="fa fa-pinterest-square" aria-hidden="true"></i> </a>
+    </div>
+  )
 
   // function test() {
   // document.querySelector('#dou1').classList.add("hide");
@@ -127,7 +136,7 @@ function RDCal() {
                   <p>Total Investment</p>
                   <div className="secondLabel">
                     <p className="labelPara">₹</p>
-                  <input className="right" type="text" value={value1 ? value1 : 1} id="monthly_investment" onChange={({ target: { value: radius } }) => {
+                  <input className="right paddi" type="text" value={value1 ? value1 : 1} id="monthly_investment" onChange={({ target: { value: radius } }) => {
                 onChange1(radius);
               }}></input>
               </div>
@@ -166,16 +175,23 @@ function RDCal() {
               }}></input>
                <br />
                <br />
-               <span className="totalInvestment"> Total Investment:- <strong>₹{investment}</strong></span>
-               <br />
-               <br />
-               <span className="totalInvestment"> Total Return:- <strong>₹{returns}</strong></span>
-               <br />
-               <br />
-               <span className="totalInvestment"> Future value:- <strong>₹{value}</strong></span>
-               <br />
-               <br />
-              </div>
+               <br/>
+                    <div className="lower">
+                      <div className="totalInvestment">Total Investment</div>
+                      <div className="totalInvestment"><strong>₹{investment}</strong></div>
+                    </div>
+                    <br />
+                    <div className="lower">
+                      <div className="totalInvestment">Total Return</div>
+                      <div className="totalInvestment"><strong>₹{returns}</strong></div>
+                    </div>
+                    <br />
+                    <div className="lower">
+                      <div className="totalInvestment">Future value</div>
+                      <div className="totalInvestment"><strong>₹{value}</strong></div>
+                    </div>
+                    <br />
+                </div>
               <div className="half">
               {/* <div className="chart mutu col-md-6 col-sm-6 show" id="dou1">
               <Doughnut data={data}></Doughnut>
@@ -183,6 +199,12 @@ function RDCal() {
             <div className="chart mutu" id="dou2">
               <Doughnut data={datashow}></Doughnut>
             </div>
+            <div className="bottom">
+                    <button type="button" onClick={() => setShowResults(currentShow => !currentShow)} className="butt">
+                      Share
+                    </button>
+                    { showResults ? <Results /> : null }
+                  </div>
             </div>
             </div>
            

@@ -8,6 +8,7 @@ import React from 'react';
 // import ReactDOM from "react-dom";
 import './index.css';
 // import App from './App';
+import 'font-awesome/css/font-awesome.min.css';
 import EMICalculator from './EMICalculator';
 import MutualFund from './MutualFund';
 import PPFCal from './PPFCalculator';

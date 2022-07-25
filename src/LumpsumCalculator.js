@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import "./App.css";
+import 'font-awesome/css/font-awesome.min.css';
 import { Chart, Tooltip, Title, ArcElement, Legend } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
 Chart.register(Tooltip, Title, ArcElement, Legend);
 
 function Lumpsum() {
+  const [showResults, setShowResults] = React.useState(false);
   const [value1, onChange1] = useState(5000);
   const [value2, onChange2] = useState(12);
   const [value3, onChange3] = useState(5);
@@ -67,6 +69,15 @@ function Lumpsum() {
       window.location.href = "#/SIPCalculator";
     }
   }
+
+
+  const Results = () => (
+    <div id="results" className="search-results">
+      <a href="http://www.facebook.com/sharer.php?s=100"><i class="fa fa-facebook-square" aria-hidden="true"></i> </a>
+      <a href="http://twitter.com/share?"><i class="fa fa-twitter-square" aria-hidden="true"></i> </a>
+      <a href="https://in.pinterest.com/login/"><i class="fa fa-pinterest-square" aria-hidden="true"></i> </a>
+    </div>
+  )
   return (
     <>
       <div className="container mar">
@@ -114,7 +125,7 @@ function Lumpsum() {
                       <div className="secondLabel">
                         <p className="labelPara">₹</p>
                         <input
-                        className="right"
+                        className="right paddi"
                         type="text"
                         value={value1 ? value1 : 1}
                         id="monthly_investment"
@@ -197,18 +208,22 @@ function Lumpsum() {
                     ></input>
                     <br />
                     <br />
-                    <span className="totalInvestment">
-                      Invested Amount:- <strong>₹{value1}</strong>
-                    </span>
+                    <br/>
+                    <div className="lower">
+                      <div className="totalInvestment">Invested Amount</div>
+                      <div className="totalInvestment"><strong>₹{value1}</strong></div>
+                    </div>
                     <br />
+                    <div className="lower">
+                      <div className="totalInvestment">Estimated returns</div>
+                      <div className="totalInvestment"><strong>₹{returns}</strong></div>
+                    </div>
                     <br />
-                    <span className="totalInvestment">Estimated returns:- <strong>₹{returns}</strong></span>
+                    <div className="lower">
+                      <div className="totalInvestment">Total value</div>
+                      <div className="totalInvestment"><strong>₹{future_value}</strong></div>
+                    </div>
                     <br />
-                    <br />
-                    <span className="totalInvestment">Total value:- <strong>₹{future_value}</strong></span>
-                    <br />
-                    <br />
-                  {/* </form> */}
                 </div>
                 <div className="half">
                 {/* <div className="chart mutu show" id="dou1">
@@ -217,6 +232,13 @@ function Lumpsum() {
               <div className="chart mutu" id="dou2">
                 <Doughnut data={datashow}></Doughnut>
               </div>
+              <div className="bottom">
+                    <button type="button" onClick={() => setShowResults(currentShow => !currentShow)} className="butt">
+                      Share
+                    </button>
+                    { showResults ? <Results /> : null }
+
+                  </div>
                 </div>
               </div>
               

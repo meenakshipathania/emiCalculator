@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import "./App.css";
+import 'font-awesome/css/font-awesome.min.css';
 import { Chart, Tooltip, Title, ArcElement, Legend } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
 Chart.register(Tooltip, Title, ArcElement, Legend);
 
 function NPSCal() {
+  const [showResults, setShowResults] = React.useState(false);
   let [value1, onChange1] = useState(10000);
   const [value2, onChange2] = useState(12);
   const [value3, onChange3] = useState(18);
@@ -74,6 +76,13 @@ function NPSCal() {
       window.location.href = "#/SIPCalculator";
     }
   }
+  const Results = () => (
+    <div id="results" className="search-results">
+      <a href="http://www.facebook.com/sharer.php?s=100"><i class="fa fa-facebook-square" aria-hidden="true"></i> </a>
+      <a href="http://twitter.com/share?"><i class="fa fa-twitter-square" aria-hidden="true"></i> </a>
+      <a href="https://in.pinterest.com/login/"><i class="fa fa-pinterest-square" aria-hidden="true"></i> </a>
+    </div>
+  )
 
   return (
     <>
@@ -204,26 +213,26 @@ function NPSCal() {
                     ></input>
                     <br />
                     <br />
-                    <span className="totalInvestment">
-                      Invested Amount:- <strong>₹{total}</strong>
-                    </span>
                     <br />
+                    <div className="lower">
+                      <div className="totalInvestment">Invested Amount</div>
+                      <div className="totalInvestment"><strong>₹{total}</strong></div>
+                    </div>
                     <br />
-                    <span className="totalInvestment">
-                      interest Earned:- <strong>₹{returns}</strong>
-                    </span>
+                    <div className="lower">
+                      <div className="totalInvestment">Interest Earned</div>
+                      <div className="totalInvestment"><strong>₹{returns}</strong></div>
+                    </div>
                     <br />
+                    <div className="lower">
+                      <div className="totalInvestment"> Maturity Amount</div>
+                      <div className="totalInvestment"><strong>₹{maturity}</strong></div>
+                    </div>
                     <br />
-                    <span className="totalInvestment">
-                      Maturity Amount:- <strong>₹{maturity}</strong>
-                    </span>
-                    <br />
-                    <br />
-                    <span className="totalInvestment">
-                      Annuity Amount:- <strong>₹{annuity}</strong>
-                    </span>
-                    <br />
-                    <br />
+                    <div className="lower">
+                      <div className="totalInvestment"> Annuity Amount</div>
+                      <div className="totalInvestment"><strong>₹{annuity}</strong></div>
+                    </div>
                 </div>
                 <div className="half">
                   {/* <div className="chart mutu show" id="dou1">
@@ -231,6 +240,12 @@ function NPSCal() {
             </div> */}
                   <div className="chart mutu" id="dou2">
                     <Doughnut data={datashow}></Doughnut>
+                  </div>
+                  <div className="bottom">
+                    <button type="button" onClick={() => setShowResults(currentShow => !currentShow)} className="butt">
+                      Share
+                    </button>
+                    { showResults ? <Results /> : null }
                   </div>
                 </div>
               </div>

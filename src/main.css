@@ -67,10 +67,11 @@
     margin: 0;
 }
 .secondLabel {
-    color: rgba(0, 0, 0, 0.87);
+    background-color: #63b1f178;
     display: inline-flex;
     width: 20%;
     font-size: 1rem;
+    padding: 5px;
     align-items: center;
     font-family: "Roboto", "Helvetica", "Arial", sans-serif;
     font-weight: 400;
@@ -82,13 +83,16 @@
     border-top: 0px;
     border-left: 0px;
     border-right: 0px;
+    border-bottom: 0px;
     outline: none;
+    color: #3498eb;
+    background-color: #bdd8ee78;
     text-align: right;
     padding-right: 10px;
 }
 p.labelPara{
-    border-bottom: 2px solid gray;
-    color: rgba(0, 0, 0, 0.54);
+    /* border-bottom: 2px solid gray; */
+    color: #3498eb;
 }
 .mar{
     margin-top: 20px;
@@ -97,7 +101,7 @@ p.labelPara{
 input[type="range"] {
     width: 100%;
     height: 2px;
-    color: #3f51b5;
+    color: #3498eb;
     background: rgba(255, 255, 255, 0.6);
     border-radius: 5px;
   }
@@ -117,13 +121,7 @@ input[type="range"] {
 }
 select.droplist {
     border: none;
-    background: transparent;
-    padding: 11px 11px 0px 3px;
-    border-bottom: 1px solid black;
-    outline: none;
-}
-.hide{
-    display: none !important;
+    background: transparen;
 }
 .show{
     display: block !important;
@@ -134,11 +132,28 @@ select.droplist {
 .chart{
     margin-left: auto;
     margin-right: auto;
-    width: 80%;
+    width: 90%;
 }
-span.totalInvestment {
+.lower{
+    display: flex;
+    justify-content: space-between;
+}
+.totalInvestment {
     font-family: Arial,Helvetica,sans-serif;
     font-size: 1.2rem;
+}
+button.butt {
+    padding: 10px 40px;
+    margin-top: 20px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    background-color: #3498eb;
+    font-size: 20px;
+}
+.paddi{
+    padding-left: 2px;
+    padding-right: 2px;
 }
 .drop{
     text-align: center;
@@ -158,6 +173,24 @@ span.totalInvestment {
     color: black;
     /* list-style: none; */
 }
+.search-results a{
+    display: inline-block;
+    font-size: 35px;
+    padding: 0px 10px;
+}
+.closeButton{
+    background-color: #3498eb;
+    color: #fff;
+    margin-left: 2px;
+    height: 50px;
+    border-radius: 5px;
+    border: none;
+    padding: 0px 10px;
+}
+/* 
+.butt:hover + #myDIV{
+    display: block;;
+ } */
 
 @media screen and (max-width: 1200px){
     .secondLabel{
@@ -189,6 +222,7 @@ span.totalInvestment {
     font-size: 20px;
     padding: 11px;
  }
+
 
   }
   @media screen and (max-width: 891px) {

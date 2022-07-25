@@ -1,5 +1,6 @@
 import React from "react";
 import "./App.css";
+import 'font-awesome/css/font-awesome.min.css';
 // import MutualFund from "./MutualFund";
 import { Chart, Tooltip, Title, ArcElement, Legend} from 'chart.js';
 // import { Doughnut } from 'react-chartjs-2';

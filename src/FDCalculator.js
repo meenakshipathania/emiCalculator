@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import "./App.css";
+import 'font-awesome/css/font-awesome.min.css';
 import { Chart, Tooltip, Title, ArcElement, Legend } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
 Chart.register(Tooltip, Title, ArcElement, Legend);
 
 function FDCal() {
+  const [showResults, setShowResults] = React.useState(false);
   const [value1, onChange1] = useState(100000);
   const [value2, onChange2] = useState(6.5);
   const [value3, onChange3] = useState(5);
@@ -38,7 +40,14 @@ function FDCal() {
   //   document.querySelector("#dou2").classList.add("show");
   //   document.querySelector("#dou1").classList.remove("show");
   // }
-
+  const Results = () => (
+    <div id="results" className="search-results">
+      <a href="http://www.facebook.com/sharer.php?s=100"><i class="fa fa-facebook-square" aria-hidden="true"></i> </a>
+      <a href="http://twitter.com/share?"><i class="fa fa-twitter-square" aria-hidden="true"></i> </a>
+      <a href="https://in.pinterest.com/login/"><i class="fa fa-pinterest-square" aria-hidden="true"></i> </a>
+    </div>
+  )
+  
  
   function functionOne(e) {
     let value = +e.target.value;
@@ -112,7 +121,7 @@ function FDCal() {
                       <div className="secondLabel">
                           <p className="labelPara">₹</p>
                       <input
-                        className="right"
+                        className="right paddi"
                         type="text"
                         value={value1 ? value1 : 1}
                         id="monthly_investment"
@@ -199,16 +208,21 @@ function FDCal() {
                     ></input>
                     <br />
                     <br />
-                    <span className="totalInvestment">
-                      Invested Amount:- <strong>₹{value1}</strong>
-                    </span>
+                    <br/>
+                    <div className="lower">
+                      <div className="totalInvestment">Invested Amount</div>
+                      <div className="totalInvestment"><strong>₹{value1}</strong></div>
+                    </div>
                     <br />
+                    <div className="lower">
+                      <div className="totalInvestment">Estimated Returns</div>
+                      <div className="totalInvestment"><strong>₹{returns}</strong></div>
+                    </div>
                     <br />
-                    <span className="totalInvestment"> Estimated Returns:- <strong>₹{returns}</strong></span>
-                    <br />
-                    <br />
-                    <span className="totalInvestment"> Total value:- <strong>₹{Future}</strong></span>
-                    <br />
+                    <div className="lower">
+                      <div className="totalInvestment">Total value</div>
+                      <div className="totalInvestment"><strong>₹{Future}</strong></div>
+                    </div>
                     <br />
                 </div>
                 <div className="half">
@@ -217,6 +231,12 @@ function FDCal() {
                   </div> */}
                   <div className="chart mutu" id="dou2">
                     <Doughnut data={datashow}></Doughnut>
+                  </div>
+                  <div className="bottom">
+                    <button type="button" onClick={() => setShowResults(currentShow => !currentShow)} className="butt">
+                      Share
+                    </button>
+                    { showResults ? <Results /> : null }
                   </div>
                 </div>
               </div>

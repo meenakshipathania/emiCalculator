@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import "./App.css";
+import 'font-awesome/css/font-awesome.min.css';
+import { Doughnut } from "react-chartjs-2";
 import { Chart, Tooltip, Title, ArcElement, Legend } from "chart.js";
 // import { Doughnut } from "react-chartjs-2";
 Chart.register(Tooltip, Title, ArcElement, Legend);
 
 function HRACal() {
+  const [showResults, setShowResults] = React.useState(false);
   let [value1, onChange1] = useState(20000);
   const [value2, onChange2] = useState(10000);
   const [value3, onChange3] = useState(10000);
@@ -35,15 +38,15 @@ function HRACal() {
   // };
 
 
-//   const datashow = {
-//     labels: ["Investment", "Return"],
-//     datasets: [
-//       {
-//         data: [hra],
-//         backgroundColor: ["#17BFB5", "#37578a"],
-//       },
-//     ],
-//   };
+  const datashow = {
+    labels: ["HRA Tax benefits"],
+    datasets: [
+      {
+        data: [hra()],
+        backgroundColor: ["#37578a"],
+      },
+    ],
+  };
 
   // function test() {
   //   document.querySelector("#dou1").classList.add("hide");
@@ -51,7 +54,14 @@ function HRACal() {
   //   document.querySelector("#dou1").classList.remove("show");
   // }
 
-
+  const Results = () => (
+    <div id="results" className="search-results">
+      <a href="http://www.facebook.com/sharer.php?s=100"><i class="fa fa-facebook-square" aria-hidden="true"></i> </a>
+      <a href="http://twitter.com/share?"><i class="fa fa-twitter-square" aria-hidden="true"></i> </a>
+      <a href="https://in.pinterest.com/login/"><i class="fa fa-pinterest-square" aria-hidden="true"></i> </a>
+    </div>
+  )
+  
   
   function functionOne(e) {
     let value = +e.target.value;
@@ -126,7 +136,7 @@ function HRACal() {
                       <div className="secondLabel">
                           <p className="labelPara">₹</p>
                       <input
-                        className="right"
+                        className="right paddi"
                         type="text"
                         value={value1 ? value1 : 1}
                         id="monthly_investment"
@@ -155,8 +165,9 @@ function HRACal() {
                         HRA (As Per Pay Slip)
                       </p>
                       <div className="secondLabel">
+                      <p className="labelPara">₹</p> 
                       <input
-                        className="right"
+                        className="right paddi"
                         type="text"
                         value={value2 ? value2 : 0}
                         id="return_rate"
@@ -164,7 +175,7 @@ function HRACal() {
                           onChange2(radius);
                         }}
                       ></input>
-                       <p className="labelPara">₹</p> 
+                       
                       </div>
                     
                     </div>
@@ -213,15 +224,27 @@ function HRACal() {
                     <br />
                     <br />
                     <br />
-                    <br />
+                    <div className="lower">
+                    <div className="totalInvestment">HRA Tax Benifits</div>
+                    <div className="totalInvestment">
+                      <strong>₹{hra()}</strong>
+                    </div>
+                  </div>
                 </div>
                 <div className="half">
                   {/* <div className="chart mutu show" id="dou1">
               <Doughnut data={data}></Doughnut>
             </div> */}
-                  <span className="totalInvestment">
-                      HRA Tax Benifits:- <strong>₹{hra()}</strong>
-                    </span>
+               <div className="chart" id="dou2">
+                    <Doughnut data={datashow}></Doughnut>
+                  </div>
+                  <div className="bottom">
+                    <button type="button" onClick={() => setShowResults(currentShow => !currentShow)} className="butt">
+                      Share
+                    </button>
+                    { showResults ? <Results /> : null }
+                  </div>
+                 
                 </div>
               </div>
 
