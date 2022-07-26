@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./App.css";
+import { ShareSocial } from "react-share-social";
 import 'font-awesome/css/font-awesome.min.css';
 import { Doughnut } from "react-chartjs-2";
 import { Chart, Tooltip, Title, ArcElement, Legend } from "chart.js";
@@ -8,6 +9,7 @@ Chart.register(Tooltip, Title, ArcElement, Legend);
 
 function HRACal() {
   const [showResults, setShowResults] = React.useState(false);
+  const [buttonText, setButtonText] = useState("Share");
   let [value1, onChange1] = useState(20000);
   const [value2, onChange2] = useState(10000);
   const [value3, onChange3] = useState(10000);
@@ -48,21 +50,30 @@ function HRACal() {
     ],
   };
 
-  // function test() {
-  //   document.querySelector("#dou1").classList.add("hide");
-  //   document.querySelector("#dou2").classList.add("show");
-  //   document.querySelector("#dou1").classList.remove("show");
-  // }
-
+  const style = {
+    borderRadius: 3,
+    border: 0,
+    color: "white",
+    padding: "0 30px",
+  };
   const Results = () => (
     <div id="results" className="search-results">
-      <a href="http://www.facebook.com/sharer.php?s=100"><i class="fa fa-facebook-square" aria-hidden="true"></i> </a>
-      <a href="http://twitter.com/share?"><i class="fa fa-twitter-square" aria-hidden="true"></i> </a>
-      <a href="https://in.pinterest.com/login/"><i class="fa fa-pinterest-square" aria-hidden="true"></i> </a>
+      <div className="socialshare">
+        <ShareSocial
+          style={style}
+          url="http://www.psd2htmlx.com/react/allcalculator/index.html#/HRACalculator"
+          socialTypes={["facebook", "twitter", "linkedin"]}
+        />
+      </div>
     </div>
-  )
-  
-  
+  );
+  function handleClick() {
+    if (buttonText === "Hide") {
+      setButtonText("Share");
+    } else {
+      setButtonText("Hide");
+    }
+  }
   function functionOne(e) {
     let value = +e.target.value;
     if (value === 2) {
@@ -239,12 +250,18 @@ function HRACal() {
                     <Doughnut data={datashow}></Doughnut>
                   </div>
                   <div className="bottom">
-                    <button type="button" onClick={() => setShowResults(currentShow => !currentShow)} className="butt">
-                      Share
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setShowResults((currentShow) => !currentShow);
+                        handleClick();
+                      }}
+                      className="butt"
+                    >
+                      {buttonText}
                     </button>
-                    { showResults ? <Results /> : null }
-                  </div>
-                 
+                    {showResults ? <Results /> : null}
+                  </div>                 
                 </div>
               </div>
 

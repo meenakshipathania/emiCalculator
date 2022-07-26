@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import "./App.css";
-import 'font-awesome/css/font-awesome.min.css';
+import { ShareSocial } from "react-share-social";
+import "font-awesome/css/font-awesome.min.css";
 import { Chart, Tooltip, Title, ArcElement, Legend } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
 Chart.register(Tooltip, Title, ArcElement, Legend);
 
 function Lumpsum() {
   const [showResults, setShowResults] = React.useState(false);
+  const [buttonText, setButtonText] = useState("Share");
   const [value1, onChange1] = useState(5000);
   const [value2, onChange2] = useState(12);
   const [value3, onChange3] = useState(5);
@@ -27,6 +29,13 @@ function Lumpsum() {
   //   ],
   // };
 
+  function handleClick() {
+    if (buttonText === "Hide") {
+      setButtonText("Share");
+    } else {
+      setButtonText("Hide");
+    }
+  }
   const datashow = {
     labels: ["Investment", "Return", "Total Value"],
     datasets: [
@@ -36,13 +45,7 @@ function Lumpsum() {
       },
     ],
   };
-  // function test() {
-  //   document.querySelector("#dou1").classList.add("hide");
-  //   document.querySelector("#dou2").classList.add("show");
-  //   document.querySelector("#dou1").classList.remove("show");
-  // }
 
- 
   function functionOne(e) {
     let value = +e.target.value;
     if (value === 2) {
@@ -70,12 +73,20 @@ function Lumpsum() {
     }
   }
 
+  const style = {
+    borderRadius: 3,
+    border: 0,
+    color: "white",
+    padding: "0 30px",
+  };
 
   const Results = () => (
     <div id="results" className="search-results">
-      <a href="http://www.facebook.com/sharer.php?s=100"><i class="fa fa-facebook-square" aria-hidden="true"></i> </a>
-      <a href="http://twitter.com/share?"><i class="fa fa-twitter-square" aria-hidden="true"></i> </a>
-      <a href="https://in.pinterest.com/login/"><i class="fa fa-pinterest-square" aria-hidden="true"></i> </a>
+       <div className="socialshare"><ShareSocial
+                    style={style}
+                    url="http://www.psd2htmlx.com/react/allcalculator/index.html#/Lumpsum"
+                    socialTypes={["facebook", "twitter", "linkedin"]}
+                  /></div>
     </div>
   )
   return (
@@ -83,14 +94,14 @@ function Lumpsum() {
       <div className="container mar">
         <div className="row">
           <div className="menu marg">
-          <a href="/">SIP Calculator</a>
+            <a href="/">SIP Calculator</a>
             <a href="#/Lumpsum">Lump Sum Calculator</a>
             <a href="#/mutual">Mutual Fund Calculator</a>
             <a href="#/PPFCalculator">PPF Calculator</a>
             <a href="#/SWPCalculator">SWP Calculator</a>
             <a href="#/FDCalculator">FD Calculator</a>
             <a href="#/RDCalculator">RD Calculator</a>
-            <a href="#/HRACalculator">HRA Calculator</a> 
+            <a href="#/HRACalculator">HRA Calculator</a>
             <a href="#/EMICalculator">EMI Calculator</a>
             <a href="#/NPSCalculator">NPS Calculator</a>
           </div>
@@ -120,11 +131,11 @@ function Lumpsum() {
               <div className="inner_container">
                 <div className="half">
                   {/* <form action="/" method="post"> */}
-                    <div className="inputfield">
-                      <p>Total Investment</p>
-                      <div className="secondLabel">
-                        <p className="labelPara">₹</p>
-                        <input
+                  <div className="inputfield">
+                    <p>Total Investment</p>
+                    <div className="secondLabel">
+                      <p className="labelPara">₹</p>
+                      <input
                         className="right paddi"
                         type="text"
                         value={value1 ? value1 : 1}
@@ -133,25 +144,25 @@ function Lumpsum() {
                           onChange1(radius);
                         }}
                       ></input>
-                      </div> 
                     </div>
-                    <input
-                      type="range"
-                      min="500"
-                      step="500"
-                      id="invest1"
-                      value={value1 ? value1 : 1}
-                      max="200000"
-                      className="range"
-                      onChange={({ target: { value: radius } }) => {
-                        onChange1(radius);
-                      }}
-                    ></input>
-                    <br />
-                    <br />
-                    <div className="inputfield">
-                      <p>Expected Return Rate</p>
-                      <div className="secondLabel">
+                  </div>
+                  <input
+                    type="range"
+                    min="500"
+                    step="500"
+                    id="invest1"
+                    value={value1 ? value1 : 1}
+                    max="200000"
+                    className="range"
+                    onChange={({ target: { value: radius } }) => {
+                      onChange1(radius);
+                    }}
+                  ></input>
+                  <br />
+                  <br />
+                  <div className="inputfield">
+                    <p>Expected Return Rate</p>
+                    <div className="secondLabel">
                       <input
                         className="right"
                         type="text"
@@ -161,26 +172,26 @@ function Lumpsum() {
                           onChange2(radius);
                         }}
                       ></input>
-                       <p className="labelPara">%</p>
-                      </div>  
+                      <p className="labelPara">%</p>
                     </div>
-                    <input
-                      type="range"
-                      min="1"
-                      id="invest2"
-                      value={value2 ? value2 : 0}
-                      max="30"
-                      step="0.5"
-                      className="range"
-                      onChange={({ target: { value: radius } }) => {
-                        onChange2(radius);
-                      }}
-                    ></input>
-                    <br />
-                    <br />
-                    <div className="inputfield">
-                      <p>Time Period</p>
-                      <div className="secondLabel">
+                  </div>
+                  <input
+                    type="range"
+                    min="1"
+                    id="invest2"
+                    value={value2 ? value2 : 0}
+                    max="30"
+                    step="0.5"
+                    className="range"
+                    onChange={({ target: { value: radius } }) => {
+                      onChange2(radius);
+                    }}
+                  ></input>
+                  <br />
+                  <br />
+                  <div className="inputfield">
+                    <p>Time Period</p>
+                    <div className="secondLabel">
                       <input
                         className="right"
                         type="text"
@@ -191,57 +202,67 @@ function Lumpsum() {
                         }}
                       ></input>
                       <p className="labelPara">Yr</p>
-                      </div>
-                      
                     </div>
-                    <input
-                      type="range"
-                      min="1"
-                      id="invest3"
-                      value={value3 ? value3 : 0}
-                      max="30"
-                      step="1"
-                      className="range"
-                      onChange={({ target: { value: radius } }) => {
-                        onChange3(radius);
-                      }}
-                    ></input>
-                    <br />
-                    <br />
-                    <br/>
-                    <div className="lower">
-                      <div className="totalInvestment">Invested Amount</div>
-                      <div className="totalInvestment"><strong>₹{value1}</strong></div>
+                  </div>
+                  <input
+                    type="range"
+                    min="1"
+                    id="invest3"
+                    value={value3 ? value3 : 0}
+                    max="30"
+                    step="1"
+                    className="range"
+                    onChange={({ target: { value: radius } }) => {
+                      onChange3(radius);
+                    }}
+                  ></input>
+                  <br />
+                  <br />
+                  <br />
+                  <div className="lower">
+                    <div className="totalInvestment">Invested Amount</div>
+                    <div className="totalInvestment">
+                      <strong>₹{value1}</strong>
                     </div>
-                    <br />
-                    <div className="lower">
-                      <div className="totalInvestment">Estimated returns</div>
-                      <div className="totalInvestment"><strong>₹{returns}</strong></div>
+                  </div>
+                  <br />
+                  <div className="lower">
+                    <div className="totalInvestment">Estimated returns</div>
+                    <div className="totalInvestment">
+                      <strong>₹{returns}</strong>
                     </div>
-                    <br />
-                    <div className="lower">
-                      <div className="totalInvestment">Total value</div>
-                      <div className="totalInvestment"><strong>₹{future_value}</strong></div>
+                  </div>
+                  <br />
+                  <div className="lower">
+                    <div className="totalInvestment">Total value</div>
+                    <div className="totalInvestment">
+                      <strong>₹{future_value}</strong>
                     </div>
-                    <br />
+                  </div>
+                  <br />
                 </div>
                 <div className="half">
-                {/* <div className="chart mutu show" id="dou1">
+                  {/* <div className="chart mutu show" id="dou1">
                 <Doughnut data={data}></Doughnut>
               </div> */}
-              <div className="chart mutu" id="dou2">
-                <Doughnut data={datashow}></Doughnut>
-              </div>
-              <div className="bottom">
-                    <button type="button" onClick={() => setShowResults(currentShow => !currentShow)} className="butt">
-                      Share
+                  <div className="chart mutu" id="dou2">
+                    <Doughnut data={datashow}></Doughnut>
+                  </div>
+                  <div className="bottom">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setShowResults((currentShow) => !currentShow);
+                        handleClick();
+                      }}
+                      className="butt"
+                    >
+                      {buttonText}
                     </button>
-                    { showResults ? <Results /> : null }
-
+                    {showResults ? <Results /> : null}
                   </div>
                 </div>
               </div>
-              
             </div>
           </div>
         </div>

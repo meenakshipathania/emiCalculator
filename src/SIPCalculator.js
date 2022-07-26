@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import "./App.css";
-import 'font-awesome/css/font-awesome.min.css';
+import { ShareSocial } from "react-share-social";
+import "font-awesome/css/font-awesome.min.css";
 import { Chart, Tooltip, Title, ArcElement, Legend } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
 Chart.register(Tooltip, Title, ArcElement, Legend);
 
 function SIPCal() {
   const [showResults, setShowResults] = React.useState(false);
+  const [buttonText, setButtonText] = useState('Share');
   let [value1, onChange1] = useState(10000);
   const [value2, onChange2] = useState(12);
   const [value3, onChange3] = useState(5);
@@ -21,20 +23,7 @@ function SIPCal() {
     monthlyRate;
   futureValue = Math.round(futureValue);
   var returns = futureValue - investment;
-
-  // const data = {
-  //   labels: [
-  //     'Amount',
-  //     'Interest',
-  //     'Total Years'
-  // ],
-  //   datasets: [{
-  //       data: [value1,value2,value3],
-  //       backgroundColor: ['#17BFB5','#37578a','#b4294e'],
-  //   }
-  // ],
-
-  // };
+  
   const datashow = {
     labels: ["Investment", "Return", "Future Value"],
     datasets: [
@@ -45,11 +34,15 @@ function SIPCal() {
     ],
   };
 
-  // function test() {
-  //   document.querySelector("#dou1").classList.add("hide");
-  //   document.querySelector("#dou2").classList.add("show");
-  //   document.querySelector("#dou1").classList.remove("show");
-  // }
+  function handleClick() {
+    if (buttonText==="Hide"){
+      setButtonText("Share");
+    }
+    else{
+      setButtonText('Hide');
+    }
+    
+  }
 
   function functionOne(e) {
     let value = +e.target.value;
@@ -78,23 +71,21 @@ function SIPCal() {
     }
   }
 
-
-  const Results = () => (
+   const Results = () => (
     <div id="results" className="search-results">
-      <a href="http://www.facebook.com/sharer.php?s=100"><i class="fa fa-facebook-square" aria-hidden="true"></i> </a>
-      <a href="http://twitter.com/share?"><i class="fa fa-twitter-square" aria-hidden="true"></i> </a>
-      <a href="https://in.pinterest.com/login/"><i class="fa fa-pinterest-square" aria-hidden="true"></i> </a>
+       <div className="socialshare"><ShareSocial
+                    style={style}
+                    url="http://www.psd2htmlx.com/react/allcalculator/index.html"
+                    socialTypes={["facebook", "twitter", "linkedin"]}
+                  /></div>
     </div>
   )
-  
-  // function myFunction() {
-  //   var x = document.getElementById("myDIV[0]");
-  //   if (x.style.display === "none") {
-  //     x.style.display = "block";
-  //   } else {
-  //     x.style.display = "none";
-  //   }
-  // }
+  const style = {
+    borderRadius: 3,
+    border: 0,
+    color: 'white',
+    padding: '0 30px',
+  };
 
   return (
     <>
@@ -255,11 +246,17 @@ function SIPCal() {
                     <Doughnut data={datashow}></Doughnut>
                   </div>
                   <div className="bottom">
-                    <button type="button" onClick={() => setShowResults(currentShow => !currentShow)} className="butt">
-                      Share
+                    <button type="button" onClick={() => {
+          setShowResults(currentShow => !currentShow);
+          handleClick();
+        }} className="butt">
+                      {buttonText}
                     </button>
                     { showResults ? <Results /> : null }
                   </div>
+                 
+                  
+                  
                 </div>
               </div>
 

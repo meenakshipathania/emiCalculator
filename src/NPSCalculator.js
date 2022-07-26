@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./App.css";
+import { ShareSocial } from "react-share-social";
 import 'font-awesome/css/font-awesome.min.css';
 import { Chart, Tooltip, Title, ArcElement, Legend } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
@@ -7,6 +8,7 @@ Chart.register(Tooltip, Title, ArcElement, Legend);
 
 function NPSCal() {
   const [showResults, setShowResults] = React.useState(false);
+  const [buttonText, setButtonText] = useState("Share");
   let [value1, onChange1] = useState(10000);
   const [value2, onChange2] = useState(12);
   const [value3, onChange3] = useState(18);
@@ -44,12 +46,6 @@ function NPSCal() {
     ],
   };
 
-  // function test() {
-  //   document.querySelector("#dou1").classList.add("hide");
-  //   document.querySelector("#dou2").classList.add("show");
-  //   document.querySelector("#dou1").classList.remove("show");
-  // }
-
   function functionOne(e) {
     let value = +e.target.value;
     if (value === 2) {
@@ -76,13 +72,31 @@ function NPSCal() {
       window.location.href = "#/SIPCalculator";
     }
   }
+  const style = {
+    borderRadius: 3,
+    border: 0,
+    color: "white",
+    padding: "0 30px",
+  };
   const Results = () => (
     <div id="results" className="search-results">
-      <a href="http://www.facebook.com/sharer.php?s=100"><i class="fa fa-facebook-square" aria-hidden="true"></i> </a>
-      <a href="http://twitter.com/share?"><i class="fa fa-twitter-square" aria-hidden="true"></i> </a>
-      <a href="https://in.pinterest.com/login/"><i class="fa fa-pinterest-square" aria-hidden="true"></i> </a>
+      <div className="socialshare">
+        <ShareSocial
+          style={style}
+          url="http://www.psd2htmlx.com/react/allcalculator/index.html#/NPSCalculator"
+          socialTypes={["facebook", "twitter", "linkedin"]}
+        />
+      </div>
     </div>
-  )
+  );
+
+  function handleClick() {
+    if (buttonText === "Hide") {
+      setButtonText("Share");
+    } else {
+      setButtonText("Hide");
+    }
+  }
 
   return (
     <>
@@ -242,10 +256,17 @@ function NPSCal() {
                     <Doughnut data={datashow}></Doughnut>
                   </div>
                   <div className="bottom">
-                    <button type="button" onClick={() => setShowResults(currentShow => !currentShow)} className="butt">
-                      Share
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setShowResults((currentShow) => !currentShow);
+                        handleClick();
+                      }}
+                      className="butt"
+                    >
+                      {buttonText}
                     </button>
-                    { showResults ? <Results /> : null }
+                    {showResults ? <Results /> : null}
                   </div>
                 </div>
               </div>

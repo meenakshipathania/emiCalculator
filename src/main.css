@@ -21,18 +21,6 @@
     margin-right: 0;
 }
 .calculation {
-    /* background-color: white;
-    color: black;
-    box-sizing: border-box;
-    margin-top: 70px !important;
-    box-shadow: 5px 10px 18px #888888;
-    display: flex;
-    width: 74%;
-    height: 500px;
-    padding: 10px;
-    border-radius: 5px; */
-
-
     width: 75%;
     padding: 4rem;
     text-align: center;
@@ -159,10 +147,6 @@ button.butt {
     text-align: center;
     display:none;
 }
-/* .drop ul li {
-    list-style-type: none;
-    display: none;
-} */
 .drop_input{
     border:0px;
     border-bottom: 1px solid black;
@@ -171,7 +155,6 @@ button.butt {
 .drop ul li a {
     text-decoration: none;
     color: black;
-    /* list-style: none; */
 }
 .search-results a{
     display: inline-block;
@@ -187,10 +170,10 @@ button.butt {
     border: none;
     padding: 0px 10px;
 }
-/* 
-.butt:hover + #myDIV{
-    display: block;;
- } */
+.socialshare * {
+    text-align: center !important;
+    overflow-x: hidden !important;
+}
 
 @media screen and (max-width: 1200px){
     .secondLabel{
